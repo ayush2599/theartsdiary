@@ -1,4 +1,5 @@
 {
+  "homepage":"https://theartsdiary.ayushkarn.in",
   "name": "theartsdiary",
   "version": "0.1.0",
   "private": true,
@@ -12,6 +13,7 @@
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "bootstrap": "^5.3.2",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
@@ -22,6 +24,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
