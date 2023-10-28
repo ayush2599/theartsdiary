@@ -1,5 +1,5 @@
 {
-  "homepage":"https://theartsdiary.ayushkarn.in",
+  "homepage": "https://theartsdiary.ayushkarn.in",
   "name": "theartsdiary",
   "version": "0.1.0",
   "private": true,
@@ -13,10 +13,16 @@
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "bootstrap": "^5.3.2",
+    "firebase": "^10.5.2",
     "gh-pages": "^6.0.0",
+    "popper.js": "^1.16.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
+    "react-layout-masonry": "^1.1.0",
+    "react-masonry-css": "^1.0.16",
+    "react-responsive-masonry": "^2.1.7",
+    "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.0",
     "typescript": "^4.9.5",
@@ -24,8 +30,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-responsive-masonry": "^2.1.2"
   }
 }
