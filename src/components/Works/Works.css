@@ -1,0 +1,8 @@
+
+.card:hover {
+    transform: scale(1.05); /* Increase size on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.479); /* Add a shadow on hover */
+    cursor: pointer; /* Change cursor on hover */
+    transition: 0.2s ease-in-out;
+    /* Add any other styles you want for the hover effect */
+  }

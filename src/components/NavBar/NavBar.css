@@ -1,42 +1,57 @@
 
 @font-face {
     font-family: 'Syne-Medium'; /* Give the font a name */
-    src: url('../../../public/assets/Syne-Medium.ttf') format('ttf');
+    src: url('../../../public/assets/Syne-Medium.ttf') format('truetype');
   }
 
   @font-face {
     font-family: 'Syne-Bold'; /* Give the font a name */
-    src: url('../../../public/assets/Syne-Bold.ttf') format('ttf');
+    src: url('../../../public/assets/Syne-Bold.ttf') format('truetype');
   }
   
-  .navbar-brand {
-    position: absolute;
-    top: 8px;
-    left: 50%; /* Move the div 50% from the left edge of its container */
-    transform: translateX(-50%); /* Move the div back by 50% of its own width */
-    font-family: 'Syne-Bold', sans-serif; 
+  .navbar{
+    background-color: #fff;
   }
-
-  .social-icons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:center;
+  .navbar-brand{
+    margin-top: 10px;
+    margin-left: 20px;
   }
-
-  .social-icons a{
-    color: #333;
-    padding-left: 20px;
-    font-size: 20px;
+  .navbar-brand .title{
+    font-family: 'Syne-Medium',sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    
   }
-      
   .navbar-toggler{
     border: 0px !important;
   }
-  .show .navbar-nav .nav-link{
-    padding: 10px 0px 10px  0px;
+
+  .nav-link{
+    padding-left: 20px !important;
+    font-size: 16px;
+    color: #000 !important;
+    text-decoration: none !important;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .show .social-icons {
-    padding: 10px 10px 10px  0px;
+  .nav-link a{
+    color: #000;
+    text-decoration: none !important;
   }
+
+  #basic-navbar-nav{
+    margin-right: 20px;
+  }
+
+  @media (max-width: 991px) {
+    .logo img{
+        width: 40px;
+        height: 40px;
+    }
+
+    .navbar-brand .title{
+        font-size: 20px;
+    }
+  }
+  
