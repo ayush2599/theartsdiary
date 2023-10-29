@@ -164,7 +164,6 @@ const Admin: FC<AdminProps> = () => {
             name="size"
             value={formData.size}
             onChange={handleChange}
-            required
           />
         </Form.Group>
 
@@ -184,7 +183,6 @@ const Admin: FC<AdminProps> = () => {
             name="thumbLink"
             value={formData.thumbLink}
             onChange={handleChange}
-            required
           />
         </Form.Group>
 
@@ -195,7 +193,6 @@ const Admin: FC<AdminProps> = () => {
             name="instaPostLink"
             value={formData.instaPostLink}
             onChange={handleChange}
-            required
           />
         </Form.Group>
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter  as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
-import Works from './components/Works/Works';
 import Orders from './components/Orders/Orders';
 import Blogs from './components/Blogs/Blogs';
 import About from './components/About/About';
@@ -12,6 +11,7 @@ import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
 import Masonry from "react-responsive-masonry";
+import Works from './components/Works/Works';
 
 function App() {
   return (
