@@ -1,223 +1,114 @@
-import React, { FC, useState } from "react";
-import { Form, Button, Container, Toast } from "react-bootstrap";
-import "./Admin.css";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import myWork from "../../interface/myWork";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import React, { FC, useState, useEffect } from "react";
+import { Tab, Tabs, Table, Button } from "react-bootstrap";
+import { collection, getDocs, addDoc, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { myWork } from "../../interface/myWork";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesome
+import { useNavigate } from 'react-router-dom';
+import "./Admin.css"; // Import your custom CSS file for styling
 
 interface AdminProps {}
 
-// // Reading data
-// async function fetchData() {
-//   const querySnapshot = await getDocs(collection(db, 'myWorks'));
-//   querySnapshot.forEach((doc) => {
-//     console.log(doc.id, ' => ', doc.data());
-//   });
-//   pushData();
-// }
-
-// fetchData(); // Call the async function
-
-// async function pushData() {
-//   const docRef = await addDoc(collection(db, 'myWorks'), {
-//       title: 'The Purr-fect Pari',
-//       year: '2023',
-//     });
-//     console.log('Document written with ID: ', docRef.id);
-// }
-
-// // Writing data
-// const docRef = await addDoc(collection(db, 'yourCollectionName'), {
-//   field1: 'value1',
-//   field2: 'value2',
-// });
-// console.log('Document written with ID: ', docRef.id);
-
 const Admin: FC<AdminProps> = () => {
-  const [formData, setFormData] = useState<myWork>({
-    title: "",
-    description: "",
-    year: 0,
-    category: "",
-    size: "",
-    imageLink: "",
-    thumbLink: "",
-    instaPostLink: "",
-  });
-
-  const [showToast, setShowToast] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      setSelectedImage(files[0]);
-    }
-  };
-
-  const uploadImageToFirebase = async (image: File) => {
-    const storageRef = ref(storage, `images/${image.name}`);
-
-    try {
-      await uploadBytes(storageRef, image);
-      const downloadURL = await getDownloadURL(storageRef);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading image to Firebase:", error);
-      return null;
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  const [myWorks, setMyWorks] = useState<myWork[]>([]);
+  const navigate = useNavigate();
+  
+  const fetchMyWorks = async () => {
+    const querySnapshot = await getDocs(collection(db, "myWorks"));
+    const worksData: myWork[] = [];
+    querySnapshot.forEach((doc) => {
+      const workData = doc.data() as myWork;
+      workData.id = doc.id; // Add the document ID to the myWork object
+      worksData.push(workData);
     });
+    setMyWorks(worksData);
   };
+  
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    fetchMyWorks();
+  }, []); // Fetch works when the component mounts
 
+  const handleDelete = async (documentId: string | null) => {
     try {
-      if (selectedImage) {
-        const imageLink = await uploadImageToFirebase(selectedImage);
-        if (imageLink) {
-          const updatedFormData = { ...formData, imageLink };
-          const docRef = await addDoc(collection(db, "myWorks"), updatedFormData);
-          setShowToast(true);
-          setFormData({
-            title: "",
-            description: "",
-            year: 0,
-            category: "",
-            size: "",
-            imageLink: "",
-            thumbLink: "",
-            instaPostLink: ""
-          });
-          setSelectedImage(null);
-        } else {
-          console.error("Image upload failed.");
-          // Handle the error or show a toast message
-        }
+      if(documentId)
+      {
+        await deleteDoc(doc(db, "myWorks", documentId)); // Use the document ID as the unique identifier
+        console.log(`Document with ID ${documentId} deleted successfully`);
+        fetchMyWorks(); // Fetch works again to update the list
       }
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Error deleting document: ", error);
     }
+  };
+
+  const handleEdit = (work: myWork) => {
+    // Navigate to NewWork component with the work data for editing
+    navigate(`/admin/newwork/${work.id}`);
   };
 
   return (
-    <Container>
-      <h1>Add My Work</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="title">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={4}
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="year">
-          <Form.Label>Year</Form.Label>
-          <Form.Control
-            type="number"
-            name="year"
-            value={formData.year}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="category">
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="size">
-          <Form.Label>Size</Form.Label>
-          <Form.Control
-            type="text"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="image">
-          <Form.Label>Image Upload</Form.Label>
-          <Form.Control
-            type="file"
-            id="custom-file"
-            onChange={handleImageUpload}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="thumbLink">
-          <Form.Label>Thumbnail Link</Form.Label>
-          <Form.Control
-            type="text"
-            name="thumbLink"
-            value={formData.thumbLink}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="instaPostLink">
-          <Form.Label>Instagram Post Link</Form.Label>
-          <Form.Control
-            type="text"
-            name="instaPostLink"
-            value={formData.instaPostLink}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        {/* Add more Form.Group elements for other fields */}
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      <Toast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        delay={3000}
-        autohide
-        style={{
-          position: "fixed",
-          top: "20px",
-          right: "20px",
-        }}
-      >
-        <Toast.Header>
-          <strong className="mr-auto">Success</strong>
-        </Toast.Header>
-        <Toast.Body>My Work added successfully!</Toast.Body>
-      </Toast>
-    </Container>
+    <div>
+      <Tabs defaultActiveKey="works">
+        <Tab eventKey="works" title="Works" className="mt-2">
+          <div className="d-flex justify-content-end mb-3">
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate('/admin/newwork'); // Redirect to the NewWork component
+              }}
+            >
+              Add New Work
+            </Button>
+          </div>
+          <Table bordered hover className="custom-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myWorks.map((work) => (
+                <tr key={work.id}>
+                  <td>{work.title}</td>
+                  <td>{work.year}</td>
+                  <td>{work.category}</td>
+                  <td>
+                    <Button
+                      variant="info"
+                      onClick={() => handleEdit(work)}
+                      className="action-button"
+                    >
+                      <FontAwesomeIcon icon="edit" />
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        handleDelete(work.id? work.id: null); // Call the delete function with the document ID
+                      }}
+                      className="action-button"
+                    >
+                      <FontAwesomeIcon icon="trash" />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Tab>
+        <Tab eventKey="blogs" title="Blogs">
+          <h2>Content for Tab 2</h2>
+          <p>This is the content for Tab 2.</p>
+        </Tab>
+        <Tab eventKey="testimonials" title="Testimonials">
+          <h2>Content for Tab 3</h2>
+          <p>This is the content for Tab 3.</p>
+        </Tab>
+      </Tabs>
+    </div>
   );
 };
 

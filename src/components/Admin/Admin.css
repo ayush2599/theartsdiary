@@ -1,1 +1,26 @@
-.Admin {}
+/* Admin.css */
+
+.custom-table {
+    /* Add styles to the table */
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .custom-table th {
+    /* Table header styles */
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .custom-table td {
+    /* Table cell styles */
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .action-button {
+    /* Button styles */
+    margin-right: 5px;
+  }
+  

@@ -1,1 +1,53 @@
-.Orders {}
+.Slider {
+    width: 90%;
+    margin: 5%;
+  }
+  
+  .slider-item {
+    height: 400px;  
+    position: relative; /* Add this to allow absolute positioning of the image */
+    max-width: 300px;
+    margin: 0 20px 0 20px;
+  }
+  
+  .slider-image {
+    max-width: 100%; /* Ensure the image width does not exceed its container */
+    max-height: 100%; /* Ensure the image height does not exceed its container */
+    position: absolute; /* Position the image absolutely within its container */
+    top: 50%; /* Move the image to the center vertically */
+    left: 50%; /* Move the image to the center horizontally */
+    transform: translate(-50%, -50%); /* Center the image precisely */
+  }
+  
+  .slider-text{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 70%);
+    color: #fff;
+    padding: 10px;
+  }
+
+  .slider-title{
+    font-size: 18px;
+  }
+
+  .custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
+    background-color: #fff;
+    padding: 15px 20px 15px 20px;
+    border-radius: 50%;
+  }
+  
+  .prev {
+    left: 10px; /* Adjust the left position */
+  }
+  
+  .next {
+    right: 10px; /* Adjust the right position */
+  }
