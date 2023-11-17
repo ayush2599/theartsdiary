@@ -5,7 +5,9 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -14,6 +16,7 @@
     "@types/node": "^16.18.59",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
+    "@types/react-table": "^7.7.17",
     "bootstrap": "^5.3.2",
     "dompurify": "^3.0.6",
     "firebase": "^10.5.2",
@@ -23,12 +26,18 @@
     "popper.js": "^1.16.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-bootstrap-table2-paginator": "^2.1.2",
+    "react-data-grid": "^7.0.0-beta.40",
     "react-dom": "^18.2.0",
     "react-layout-masonry": "^1.1.0",
     "react-masonry-css": "^1.0.16",
     "react-responsive-masonry": "^2.1.7",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-table": "^7.8.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -60,6 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-responsive-masonry": "^2.1.2"
+    "@types/react-responsive-masonry": "^2.1.2",
+    "@types/react-slick": "^0.23.12"
   }
 }

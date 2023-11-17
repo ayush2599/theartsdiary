@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal"; // Import the Modal component
 import Button from "react-bootstrap/Button"; // Import the Button component
 import "./Works.css";
-import myWork from "../../interface/myWork";
+import { myWork } from "../../interface/myWork";
 //import Masonry, {ResponsiveMasonry  } from "react-responsive-masonry";
 import Masonry from "react-layout-masonry";
 import { Badge } from "react-bootstrap";
@@ -61,7 +61,7 @@ const Works: FC<WorksProps> = () => {
   }
 
   return (
-    <Masonry columns={{ 640: 1, 768: 2, 1024: 3 }} gap={30}>
+    <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={20}>
       {myWorks.map((work) => (
         <div key={work.title}>
           <Card className="custom-card" onClick={() => handleCardClick(work)}>

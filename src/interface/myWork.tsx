@@ -1,12 +1,6 @@
-interface myWork {
-    title: string;
-    description: string;
-    year: number;
-    category: string;
-    size:string;
-    imageLink: string;
-    thumbLink: string;
-    instaPostLink: string;
-  }
-  
-  export default myWork;
+import { myWorkFields } from "./myWorkFields";
+
+export interface myWork extends myWorkFields{
+  id: string | null; // This is the Firebase document ID
+}
+
