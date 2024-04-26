@@ -8,6 +8,16 @@
     font-family: 'Syne-Bold'; /* Give the font a name */
     src: url('../../../public/assets/Syne-Bold.ttf') format('truetype');
   }
+
+  @font-face {
+    font-family: 'Syne-Regular'; /* Give the font a name */
+    src: url('../../../public/assets/Syne-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Syne-SemiBold'; /* Give the font a name */
+    src: url('../../../public/assets/Syne-SemiBold.ttf') format('truetype');
+  }
   
   .navbar{
     background-color: #fff;
@@ -28,7 +38,9 @@
 
   .nav-link{
     padding-left: 20px !important;
+    font-family: 'Syne-Regular',sans-serif;
     font-size: 16px;
+    font-weight: 200;
     color: #000 !important;
     text-decoration: none !important;
     margin-left: auto;
@@ -51,7 +63,28 @@
     }
 
     .navbar-brand .title{
-        font-size: 20px;
+        font-size: 22px;
     }
+
+  .navbar-collapse {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff; /* Add your desired background color */
+    z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
   }
-  
+
+  .navbar-collapse.show {
+    display: block !important;
+  }
+
+  .nav-link{
+    padding: 20px 0 20px 0;
+    border: 2px solid red;
+  }
+}

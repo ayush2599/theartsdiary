@@ -251,9 +251,10 @@ const NewWork: FC<NewWorkProps> = () => {
           position: "fixed",
           bottom: "20px",
           right: "20px",
+          backgroundColor: 'rgba(255, 255, 255, 1)',
         }}
       >
-        <Toast.Header>
+        <Toast.Header style={{ backgroundColor: '#3b3b3b', color:'#fff'}}>
           <strong className="mr-auto">Success</strong>
         </Toast.Header>
         <Toast.Body>
