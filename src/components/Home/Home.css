@@ -1,1 +1,232 @@
-.Home {}
+.header-image-container {
+  position: relative;
+  height: 90vh;
+  text-align: left;
+  overflow: hidden;
+  max-height: 100%;
+  display: flex; /* Enable Flexbox */
+  align-items: center; /* Center vertically */
+  justify-content: flex-start; /* Center horizontally */
+}
+
+.header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 5% 15%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Black overlay */
+.header-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.header-content {
+  position: relative; /* Adjusted to relative */
+  color: white;
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  text-align: left; /* Center text */
+  width: 80%;
+  top:20%;
+  left: 5%;
+}
+
+.header-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.cta-buttons .btn {
+  margin: 5px;
+}
+
+/* Custom styles for 'Place an Order' button */
+.cta-buttons .btn-place-order {
+  background-color: #fff; /* Grey close to white */
+  border: 2px solid #fff; /* Remove default border */
+  color: #231d1d; /* Darker text color for contrast */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  padding: 10px 20px; /* Adequate padding for better button visibility */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-weight: 500;
+}
+
+.cta-buttons .btn-read-story {
+  background : none;
+  border: 2px solid #fff; /* Remove default border */
+  color: #fff; /* Darker text color for contrast */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  padding: 10px 20px; /* Adequate padding for better button visibility */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-weight: 500;
+}
+
+/* Custom styles for 'Place an Order' button */
+.cta-buttons .btn-place-order:hover {
+  background : none; /* Grey close to white */
+  border: 2px solid #fff; /* Remove default border */
+  color: #fff; /* Darker text color for contrast */
+}
+
+.cta-buttons .btn-read-story:hover {
+  background-color: #fff; /* Grey close to white */
+  border: 2px solid #fff; /* Remove default border */
+  color: #231d1d; /* Darker text color for contrast */
+}
+
+.padded-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.container-title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.featured-artworks {
+  background-color: #ede0e0b0;
+}
+
+.custom-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(
+    to bottom,
+    #472828fa 60%,
+    #100c0a 100%
+  ); /* Simulating wood color */
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.1),
+    /* Top inner highlight */ inset 0 -2px 2px rgba(0, 0, 0, 0.4),
+    /* Bottom inner shadow */ 0 5px 10px rgba(0, 0, 0, 0.4),
+    /* Outer shadow for depth */ 0 -5px 10px rgba(255, 255, 255, 0.4); /* Outer highlight */
+  padding: 20px; /* Size of the white border */
+  border-radius: 0px !important; /* Adjust for desired rounded corners on the outer border */
+
+  .card-image {
+    position: relative;
+    padding: 8px;
+    background: white; /* Add this for the outer white border */
+    border-radius: 0px; /* Internal card-image radius */
+
+    img {
+      border-radius: 0px !important;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.692);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      color: #fff;
+      border-radius: 0px !important;
+    }
+
+    .overlay-text {
+      font-size: 20px;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:hover .image-overlay {
+    opacity: 1;
+  }
+}
+.featured-artworks .container {
+  width: 80%;
+}
+
+.container-buttons .btn-container-action {
+  background-color: #231d1d; /* Grey close to white */
+  border: 2px solid #231d1d; /* Remove default border */
+  color: #ffffff; /* Darker text color for contrast */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  padding: 10px 20px; /* Adequate padding for better button visibility */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-weight: 500;
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.container-buttons .btn-container-action:hover {
+  background-color: #fff; /* Slightly darker on hover for visual feedback */
+  color: #231d1d;
+  border: 2px solid #231d1d; /* Remove default border */
+}
+
+.workshops {
+  background-color: #1a1818dd;
+  color: #fff;
+}
+
+.services {
+  background-color: #ede0e0b0;
+}
+
+.testimonials {
+  background-color: #ede0e0b0;
+}
+
+@media (max-width: 768px) {
+
+  .header-image-container {
+    justify-content: center; /* Center horizontally */
+  }
+
+  .header-content {
+    text-align: center;
+    width: 90%;
+    top:20%;
+    left: 0%;
+  }
+
+  .custom-card {
+    padding: 10px; /* Smaller padding on mobile */
+  }
+
+  .featured-artworks .container {
+    width: 100%;
+  }
+
+  .header-image {
+    object-position: 50% 15%;
+  }
+}
