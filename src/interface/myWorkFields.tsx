@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface myWorkFields {
     title: string;
     description: string;
@@ -8,3 +10,16 @@ export interface myWorkFields {
     thumbLink: string;
     instaPostLink: string;
   }
+
+export interface testimonialFields {
+  name: string;
+  review: string;
+  reviewDate: Timestamp;
+  stars: number;
+  subHead: string;
+  country: string;
+  city: string;
+  address: string;
+  isImageReview: string;
+  imageLink: string;
+}

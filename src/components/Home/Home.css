@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.335);
   z-index: 1;
 }
 
@@ -37,7 +37,7 @@
   z-index: 2;
   text-align: left; /* Center text */
   width: 80%;
-  top:20%;
+  top: 20%;
   left: 5%;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .cta-buttons .btn-read-story {
-  background : none;
+  background: none;
   border: 2px solid #fff; /* Remove default border */
   color: #fff; /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
@@ -79,7 +79,7 @@
 
 /* Custom styles for 'Place an Order' button */
 .cta-buttons .btn-place-order:hover {
-  background : none; /* Grey close to white */
+  background: none; /* Grey close to white */
   border: 2px solid #fff; /* Remove default border */
   color: #fff; /* Darker text color for contrast */
 }
@@ -179,6 +179,19 @@
   font-weight: 500;
 }
 
+.container-buttons .btn-container-action-inverted {
+  background: none; /* Grey close to white */
+  border: 2px solid #fff; /* Remove default border */
+  color: #fff; /* Darker text color for contrast */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  padding: 10px 20px; /* Adequate padding for better button visibility */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-weight: 500;
+}
+
 .container-buttons {
   display: flex;
   justify-content: center;
@@ -192,9 +205,118 @@
   border: 2px solid #231d1d; /* Remove default border */
 }
 
+.container-buttons .btn-container-action-inverted:hover {
+  background-color: #fff; /* Grey close to white */
+  border: 2px solid #fff; /* Remove default border */
+  color: #231d1d; /* Darker text color for contrast */
+}
+
+.container-buttons-inverted {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.container-buttons-inverted .btn-container-action:hover {
+  background-color: #fff; /* Slightly darker on hover for visual feedback */
+  color: #231d1d;
+  border: 2px solid #231d1d; /* Remove default border */
+}
+
 .workshops {
+  padding-top: 60px;
   background-color: #1a1818dd;
   color: #fff;
+}
+
+.container-images {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.workshop-img {
+  width: 350px;
+  height: 350px;
+  border-top-right-radius: 30px; /* Rounded top-right corner */
+  border-bottom-left-radius: 30px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+}
+
+.workshop-img:nth-child(2) {
+  margin-top: 50px;
+}
+.container-text {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+.testimonial-slider {
+  width: 80%;
+  margin: auto;
+  padding-bottom: 30px;
+}
+.testimonial-container {
+  display: flex;
+  width: 50%;
+  max-width: 450px;
+  flex-direction: column;
+  align-items: center; /* Center align items for better control */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background: #f0f0f0;
+  margin: 15px; /* Add margin for spacing between slides */
+  position: relative; /* Needed for absolute positioning */
+  overflow: visible; /* Allow items to overlap container if necessary */
+}
+
+.testimonial-container::before {
+  content: "“";
+  font-size: 80px;
+  color: #231d1d;
+  position: absolute;
+  top: -35px;
+  left: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.testimonial-text {
+  width: 90%; /* Adjust width to fit content */
+  text-align: center; /* Center the text */
+  position: relative; /* Stack order control */
+  z-index: 1; /* Ensure text is above the image */
+}
+
+.client-details {
+  font-weight: bold;
+  display: block; /* Ensure it takes up full width for layout */
+  margin-top: 10px; /* Space between review and client details */
+}
+
+.testimonial-image {
+  width: 30%; /* Adjust as per design */
+  position: absolute; /* Absolute positioning */
+  top: 50%; /* Center vertically */
+  right: -80px; /* Half outside the container */
+  transform: translateY(-50%); /* Align center with text vertically */
+  z-index: 0; /* Below text */
+}
+
+.testimonial-image img {
+  width: 130px; /* Control image size */
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .services {
@@ -203,10 +325,13 @@
 
 .testimonials {
   background-color: #ede0e0b0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
-
   .header-image-container {
     justify-content: center; /* Center horizontally */
   }
@@ -214,7 +339,7 @@
   .header-content {
     text-align: center;
     width: 90%;
-    top:20%;
+    top: 20%;
     left: 0%;
   }
 
@@ -228,5 +353,52 @@
 
   .header-image {
     object-position: 50% 15%;
+  }
+
+  .workshops .container-images{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+  .workshop-img:nth-child(2) {
+    margin-top: 20px;
+  }
+
+  .workshop-img:nth-child(3) {
+    margin-top: 20px;
+  }
+
+  .testimonial-container {
+    flex-direction: column; /* Stack items vertically */
+    width: 100%; /* Increase width for smaller screens */
+    max-width: none; /* Remove max-width constraint */
+    align-items: center; /* Center align items */
+  }
+
+  .testimonial-image {
+    position: relative; /* Switch from absolute to relative */
+    width: 50%; /* Adjust width inside the container */
+    right: 0; /* Reset right positioning */
+    top: auto; /* Reset top positioning */
+    transform: translateY(0); /* Reset vertical translation */
+    margin-top: 20px; /* Add some space between text and image */
+    order: 3; /* Ensure the image comes last */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonial-image img {
+    width: 130px; /* Optionally reduce image size */
+    height: 130px; /* Match width to maintain aspect ratio */
+  }
+
+  .testimonial-text {
+    order: 1; /* Text appears first */
+  }
+
+  .client-details {
+    order: 2; /* Details appear after text */
+    margin-bottom: 10px; /* Space before the image */
   }
 }
