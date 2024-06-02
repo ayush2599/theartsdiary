@@ -1,6 +1,156 @@
+.wave-transition {
+    /* background: url("/public/assets/wave.svg"); */
+    height: 100%; /* Match SVG height */
+    width: 100%;
+  }
+
 .Footer {
-    /* background-color: #353131; */
+    position: relative;
     margin-bottom: 0;
-    margin-top: auto;
+    padding-top: 50px;
     bottom: 0;
+    overflow: visible; /* Allows the image to overflow */
+    border:1px solid rgba(255, 0, 0, 0);
+    background-color: #1a1818dd;
+    color: #FFFFFF;
+}
+.footer-trademark {
+    display: flex;  /* Aligns children (logo and text) in a row */
+    align-items: center; /* Vertically centers the items in the container */
+    justify-content: center; /* Aligns items to the start of the container */
+    padding: 10px 0; /* Adds vertical padding around the elements */
+    white-space: nowrap; /* Prevents the text from wrapping */
+    margin: 0 40px;
+}
+
+.footer-logo {
+    margin-right: 10px; /* Adds space between the logo and the text */
+    display: flex;
+    align-items: center; /* Ensures the logo is vertically centered */
+
+    img{
+        filter: invert(90%);
+    }
+}
+
+/* Styling for text within the footer */
+.footer-text {
+    font-size: 16px; /* Adjust font size as needed */
+    color: #dcdcdc !important; /* Light grey color for subtle text */
+    margin: 0; /* Removes default margins */
+    padding-left: 20px !important;
+    padding-bottom: 0px;
+    flex-grow: 1;
+}
+
+.footer-image-container {
+    position: absolute;
+    top: 0%;
+    bottom: 0%; /* Adjust as needed to let it overflow above */
+    left: 45%; /* Center align the image */
+    transform: translateX(-45%); /* Ensure it's perfectly centered */
+    z-index: 10; /* Higher z-index to ensure it's above other elements */
+}
+
+.footer-image {
+    height: auto; /* Maintain aspect ratio */
+    bottom: 0px; /* Align to the bottom */
+    position: absolute;
+    width: 150px;
+}
+
+.footer-nav {
+    z-index: 20; /* Ensures nav is above the image if they overlap */
+    padding-right: 40px;
+    padding-bottom: 40px;
+    display: flex; /* Aligns the list items horizontally */
+    list-style-type: none; /* Removes bullets */
+    margin: 0; /* Removes default margin to align properly */
+    align-items: center; /* Centers the items vertically */
+    justify-content: flex-end; /* Aligns the navigation to the right */
+}
+
+.footer-nav-item{
+    margin-right: 20px; /* Adds spacing between each link */
+}
+/* Additional specific styles for links to increase accessibility */
+.footer-nav-link {
+    font-size: 16px;
+    color: #dcdcdc !important; /* Slightly darker grey for links */
+    text-decoration: none !important; /* Removes underline from links */
+    padding: 10px 20px; /* Provides padding around links for easier clickability */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-nav-link:hover {
+    color: #fff !important; /* Changes color on hover */
+}
+
+/* Specific style for the year and copyright text */
+.mb-0 {
+    font-weight: bold; /* Makes the text bold */
+    font-size: 18px; /* Larger text for emphasis */
+}
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+
+    .Footer{
+        padding-top: 0;
+    }
+    .footer-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0px; /* Provide spacing from top of the container */
+        padding-bottom: 10px;
+        padding-right: 0;
+    }
+
+    .footer-trademark {
+        flex-direction: column;
+        order: 2; /* Make trademark appear after nav links */
+        margin-top: 20px; /* Spacing after nav links */
+        padding: 0;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .footer-text {
+        text-align: center; /* Ensure text is centered */
+        order: 1; /* Text appears before the logo */
+        text-align: center;
+        margin: 0;
+    }
+
+    .footer-logo {
+        padding: 0px;
+        order: 2;
+        margin: 0;
+        margin-top: 10px; /* Space between text and logo */
+    }
+
+    .footer-image-container {
+        position: static;
+        order: 3; /* Image appears at the bottom */
+        transform: none;
+        padding-top: 20px;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        bottom: 0px;
+        height: max-content;
+    }
+
+    .footer-image{
+        position: relative;
+        bottom: 0px;
+        left: 20px;
+        height: max-content;
+    }
+
+    .footer-nav-item {
+        margin: 5px 0; /* Reduce space between nav items */
+    }
 }

@@ -77,7 +77,7 @@ const Home: FC<HomeProps> = () => {
     };
   }, []);
 
-  const EmptyArrow = () => <div style={{ display: 'none' }} />;
+  const EmptyArrow = () => <div style={{ display: "none" }} />;
 
   const testimonialSliderSettings = {
     dots: true, // Enable navigation dots
@@ -90,7 +90,7 @@ const Home: FC<HomeProps> = () => {
     pauseOnHover: true, // Pause autoplay on hover
     adaptiveHeight: true, // Adjust height based on content
     nextArrow: <EmptyArrow />, // Hides the next arrow
-    prevArrow: <EmptyArrow />  // Hides the previous arrow
+    prevArrow: <EmptyArrow />, // Hides the previous arrow
   };
 
   return (
@@ -210,6 +210,20 @@ const Home: FC<HomeProps> = () => {
           </Slider>
         </div>
       </div>
+      {/* <div className="wave-transition">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1400 150"
+          preserveAspectRatio="none"
+          style={{ fill: "transparent", width: "100%", height: "100%" }}
+        >
+          <path
+            fill="#ede0e0b0"
+            fill-opacity="1"
+            d="M0,160L48,144C96,128,192,96,288,101.3C384,107,480,149,576,144C672,139,768,85,864,74.7C960,64,1056,96,1152,117.3C1248,139,1344,149,1392,154.7L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
+      </div> */}
     </div>
   );
 };
