@@ -48,7 +48,7 @@ const Admin: FC<AdminProps> = () => {
   };
 
   return (
-    <div>
+    <div className="admin">
       <Tabs defaultActiveKey="works">
         <Tab eventKey="works" title="Works" className="mt-2">
           <div className="d-flex justify-content-end mb-3">

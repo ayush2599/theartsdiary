@@ -15,6 +15,8 @@ import Works from "./components/Works/Works";
 import NewWork from "./components/NewWork/NewWork";
 import { ThemeProvider } from "./ThemeContext";
 import { useTheme } from "./ThemeContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 
@@ -37,7 +39,7 @@ function App() {
             </Routes>
             <div className="footer-container">
               <Footer />
-              {/* <ThemeSwitcher /> */}
+              <ThemeSwitcher />
             </div>
           </div>
         </div>
@@ -49,11 +51,9 @@ function App() {
 function ThemeSwitcher() {
   const { theme, toggleTheme } = useTheme(); // Correct use of useTheme within context
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-    </div>
+    <button className="theme-switcher" onClick={toggleTheme}>
+      <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
+    </button>
   );
 }
 
