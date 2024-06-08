@@ -1,0 +1,50 @@
+/* color_variables.css */
+
+:root {
+  --background-color: #ffffff; /* Light theme background */
+  --text-color: #333333; /* Light theme text color */
+  --navbar-background-color: #ffffff;
+  --navbar-link-color: #181818;
+  --permanent-white-color: #ffffff;
+  --permanent-dark-color: #181818;
+  --light-background-color: #dbcfcf;
+  --dark-background-color: #3a3636;
+  --dim-white-color: #f0f0f0;
+  --dim-black-color: #282828;
+  --text-darkonlightbg-color: #282828;
+  --invert-filter: none;
+
+  /* frame */
+  --wood-color-top: #472828fa;
+  --wood-color-bottom: #100c0a;
+  --inner-highlight: rgba(255, 255, 255, 0.1);
+  --inner-shadow: rgba(0, 0, 0, 0.4);
+  --outer-shadow: rgba(0, 0, 0, 0.4);
+  --outer-highlight: rgba(255, 255, 255, 0.4);
+  --frame-border-color: white;
+  --overlay-background: rgba(0, 0, 0, 0.692);
+}
+
+[data-theme="dark"] {
+  --background-color: #333333; /* Dark theme background */
+  --text-color: #ffffff; /* Dark theme text color */
+  --navbar-background-color: #181818;
+  --navbar-link-color: #fff;
+  --permanent-white-color: #ffffff;
+  --permanent-dark-color: #181818;
+  --light-background-color: #434040;
+  --dark-background-color: #282828;
+  --dim-white-color: #cac6c6;
+  --dim-black-color: #282828;
+  --text-darkonlightbg-color: #cac6c6;
+  /* frame */
+  --wood-color-top: #e8e8e8; /* Light wooden color top */
+    --wood-color-bottom: #c2c2c2; /* Light wooden color bottom */
+    --inner-highlight: rgba(220, 220, 220, 0.2); /* Slightly more visible highlight */
+    --inner-shadow: rgba(45, 45, 45, 0.7); /* Darker inner shadow for depth */
+    --outer-shadow: rgba(0, 0, 0, 0.8); /* Very dark outer shadow for a striking effect */
+    --outer-highlight: rgba(220, 220, 220, 0.5); /* Visible but subtle outer highlight */
+    --frame-border-color: #f7f7f4; /* Dark grey frame border */
+    --overlay-background: rgba(255, 255, 255, 0.1); /* Lighter overlay for contrast */
+    --invert-filter: invert(100%);
+}

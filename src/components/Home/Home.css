@@ -32,7 +32,7 @@
 
 .header-content {
   position: relative; /* Adjusted to relative */
-  color: white;
+  color: var(--permanent-white-color);
   text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
   z-index: 2;
   text-align: left; /* Center text */
@@ -52,9 +52,9 @@
 
 /* Custom styles for 'Place an Order' button */
 .cta-buttons .btn-place-order {
-  background-color: #fff; /* Grey close to white */
+  background-color: var(--permanent-white-color); /* Grey close to white */
   border: 2px solid #fff; /* Remove default border */
-  color: #231d1d; /* Darker text color for contrast */
+  color: var(--permanent-dark-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
   border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
   border-top-left-radius: 0px; /* Rounded top-right corner */
@@ -66,8 +66,8 @@
 
 .cta-buttons .btn-read-story {
   background: none;
-  border: 2px solid #fff; /* Remove default border */
-  color: #fff; /* Darker text color for contrast */
+  border: 2px solid var(--permanent-white-color); /* Remove default border */
+  color: var(--permanent-white-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
   border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
   border-top-left-radius: 0px; /* Rounded top-right corner */
@@ -80,14 +80,14 @@
 /* Custom styles for 'Place an Order' button */
 .cta-buttons .btn-place-order:hover {
   background: none; /* Grey close to white */
-  border: 2px solid #fff; /* Remove default border */
-  color: #fff; /* Darker text color for contrast */
+  border: 2px solid var(--permanent-white-color); /* Remove default border */
+  color: var(--permanent-white-color); /* Darker text color for contrast */
 }
 
 .cta-buttons .btn-read-story:hover {
-  background-color: #fff; /* Grey close to white */
-  border: 2px solid #fff; /* Remove default border */
-  color: #231d1d; /* Darker text color for contrast */
+  background-color: var(--permanent-white-color); /* Grey close to white */
+  border: 2px solid var(--permanent-white-color); /* Remove default border */
+  color: var(--permanent-dark-color); /* Darker text color for contrast */
 }
 
 .padded-container {
@@ -104,29 +104,27 @@
 }
 
 .featured-artworks {
-  background-color: #ede0e0b0;
+  background-color: var(--light-background-color);
+  color: var(--text-darkonlightbg-color);
 }
 
 .custom-card {
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
-  background: linear-gradient(
-    to bottom,
-    #472828fa 60%,
-    #100c0a 100%
-  ); /* Simulating wood color */
-  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.1),
-    /* Top inner highlight */ inset 0 -2px 2px rgba(0, 0, 0, 0.4),
-    /* Bottom inner shadow */ 0 5px 10px rgba(0, 0, 0, 0.4),
-    /* Outer shadow for depth */ 0 -5px 10px rgba(255, 255, 255, 0.4); /* Outer highlight */
+  background: linear-gradient(to bottom, var(--wood-color-top) 60%, var(--wood-color-bottom) 100%);
+  box-shadow: 
+    inset 0 2px 2px var(--inner-highlight),
+    inset 0 -2px 2px var(--inner-shadow),
+    0 5px 10px var(--outer-shadow),
+    0 -5px 10px var(--outer-highlight);
   padding: 20px; /* Size of the white border */
   border-radius: 0px !important; /* Adjust for desired rounded corners on the outer border */
 
   .card-image {
     position: relative;
     padding: 8px;
-    background: white; /* Add this for the outer white border */
+    background: var(--frame-border-color);
     border-radius: 0px; /* Internal card-image radius */
 
     img {
@@ -139,7 +137,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.692);
+      background: var(--overlay-background);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -226,8 +224,8 @@
 
 .workshops {
   padding-top: 60px;
-  background-color: #1a1818dd;
-  color: #fff;
+  background-color: var(--dark-background-color);
+  color: var(--dim-white-color);
 }
 
 .container-images {
@@ -257,6 +255,7 @@
   text-align: center;
   padding-top: 50px;
   padding-bottom: 10px;
+  font-size: 1.15rem;
 }
 
 .testimonial-slider {
@@ -267,16 +266,17 @@
 .testimonial-container {
   display: flex;
   width: 50%;
-  max-width: 450px;
+  max-width: 400px;
   flex-direction: column;
   align-items: center; /* Center align items for better control */
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  background: #f0f0f0;
+  background: var(--dim-white-color);
   margin: 15px; /* Add margin for spacing between slides */
   position: relative; /* Needed for absolute positioning */
   overflow: visible; /* Allow items to overlap container if necessary */
+  color: var(--dim-black-color);
 }
 
 .testimonial-container::before {
@@ -315,21 +315,23 @@
   width: 130px; /* Control image size */
   height: 130px;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid var(--dim-white-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .services {
-  background-color: #ede0e0b0;
+  background-color: var(--light-background-color);
+  color: var(--text-darkonlightbg-color);
 }
 
 .testimonials {
-  background-color: #ede0e0b0;
+  background-color: var(--light-background-color);
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
   padding-bottom: 40px;
+  color: var(--text-darkonlightbg-color);
 }
 
 
