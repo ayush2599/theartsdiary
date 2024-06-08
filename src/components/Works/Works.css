@@ -1,6 +1,9 @@
-
-
-
+.works{
+  background-color: var(--light-background-color);
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5%;
+}
   .workDetails{
     padding-top: 20px;
   }
@@ -21,15 +24,15 @@
     padding-right: 5px;
   }
 
-  .custom-card {
+  .work-custom-card {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
   
-    .card-image {
+    .work-card-image {
       position: relative;
   
-      .image-overlay {
+      .work-image-overlay {
         position: absolute;
         top: 0;
         left: 0;
@@ -44,7 +47,7 @@
         color: #fff;
       }
   
-      .overlay-text {
+      .work-overlay-text {
         font-size: 20px;
       }
     }
@@ -53,7 +56,7 @@
       transform: scale(1.05);
     }
   
-    &:hover .image-overlay {
+    &:hover .work-image-overlay {
       opacity: 1;
     }
   }

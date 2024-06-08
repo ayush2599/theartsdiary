@@ -61,14 +61,14 @@ const Works: FC<WorksProps> = () => {
   }
 
   return (
-    <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={20}>
+    <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={20} className="works">
       {myWorks.map((work) => (
         <div key={work.title}>
-          <Card className="custom-card" onClick={() => handleCardClick(work)}>
-            <div className="card-image">
+          <Card className="work-custom-card" onClick={() => handleCardClick(work)}>
+            <div className="work-card-image">
               <Card.Img variant="top" src={work.imageLink} alt={work.title} />
-              <div className="image-overlay">
-                <div className="overlay-text">{work.title}</div>
+              <div className="work-image-overlay">
+                <div className="work-overlay-text">{work.title}</div>
               </div>
             </div>
           </Card>

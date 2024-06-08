@@ -13,6 +13,9 @@
   --dim-black-color: #282828;
   --text-darkonlightbg-color: #282828;
   --invert-filter: none;
+  --button-bg-color: #fff; /* Light background for the button in light mode */
+    --button-text-color: #000; /* Dark text color in light mode */
+    --button-hover-bg-color: #e0e0e0; 
 
   /* frame */
   --wood-color-top: #472828fa;
@@ -47,4 +50,7 @@
     --frame-border-color: #f7f7f4; /* Dark grey frame border */
     --overlay-background: rgba(255, 255, 255, 0.1); /* Lighter overlay for contrast */
     --invert-filter: invert(100%);
+    --button-bg-color: #333; /* Dark background for the button in dark mode */
+    --button-text-color: #fff; /* Light text color in dark mode */
+    --button-hover-bg-color: #555;
 }

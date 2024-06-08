@@ -1,21 +1,25 @@
 /* Admin.css */
-
+.admin{
+    background-color: var(--light-background-color);
+    padding: 10px;
+}
 .custom-table {
     /* Add styles to the table */
     width: 100%;
     border-collapse: collapse;
+    background-color: var(--light-background-color);
   }
   
   .custom-table th {
     /* Table header styles */
-    background-color: #f2f2f2;
+    background-color: var(--light-background-color);
     text-align: left;
     padding: 10px;
   }
   
   .custom-table td {
     /* Table cell styles */
-    border: 1px solid #ddd;
+    border: 1px solid var(--light-background-color);
     padding: 10px;
   }
   
