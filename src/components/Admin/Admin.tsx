@@ -26,6 +26,7 @@ const Admin: FC<AdminProps> = () => {
   
 
   useEffect(() => {
+    document.title = "Admin | The Arts Diary"; 
     fetchMyWorks();
   }, []); // Fetch works when the component mounts
 

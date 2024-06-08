@@ -30,6 +30,7 @@ const Orders: FC<OrdersProps> = () => {
   };
 
   useEffect(() => {
+    document.title = "Orders | The Arts Diary"; 
     const fetchMyWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];

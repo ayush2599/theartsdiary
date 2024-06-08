@@ -20,6 +20,7 @@ const Works: FC<WorksProps> = () => {
   const [selectedWork, setSelectedWork] = useState<myWork | null>(null); // State for selected card data
 
   useEffect(() => {
+    document.title = "Works | The Arts Diary"; 
     const fetchMyWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];
