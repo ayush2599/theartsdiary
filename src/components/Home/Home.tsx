@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import "./Home.css";
 import { Button } from "react-bootstrap";
 import { myWork, testimonial } from "../../interface/myWork";
@@ -36,8 +36,14 @@ const Home: FC<HomeProps> = () => {
   );
 
   useEffect(() => {
+    document.title = "The Arts Diary";
     const fetchMyWorks = async () => {
-      const querySnapshot = await getDocs(collection(db, "myWorks"));
+      const q = query(
+        collection(db, "myWorks"),
+        where("isFeatured", "==", true)
+      );
+
+      const querySnapshot = await getDocs(q);
       const worksData: myWork[] = [];
       querySnapshot.forEach((doc) => {
         console.log("Pushed: " + doc.data().title);
@@ -142,30 +148,33 @@ const Home: FC<HomeProps> = () => {
         </div>
         <div className="container-images">
           <img
-            className="workshop-img"
-            src="https://picsum.photos/200/300"
-          ></img>
+            className="workshop-img side-image"
+            src="https://picsum.photos/200/300?1"
+          />
           <img
-            className="workshop-img"
-            src="https://picsum.photos/200/300"
-          ></img>
+            className="workshop-img center-image"
+            src="https://picsum.photos/220/320?2"
+          />
           <img
-            className="workshop-img"
-            src="https://picsum.photos/200/300"
-          ></img>
+            className="workshop-img side-image"
+            src="https://picsum.photos/200/300?3"
+          />
         </div>
-        <div className="container-text">
+        <div className="container-text workshop-text">
           <p>
-            Step into the world of creativity in my art workshops, tailored for
-            enthusiasts at all levels—from beginners learning the basics of
-            sketching with graphite and charcoal to advanced artists perfecting
-            hyper-realism. Whether you join virtually or in person, I'm here to
-            guide you through every stroke on your journey to mastering the art
-            you love.
-            <br />
-            <br />
-            Interested in a personalized workshop or have specific requirements?
-            Reach out to me, and let’s make art happen together!
+            <strong>Step into the world of creativity</strong> in my art
+            workshops, tailored for enthusiasts at all levels—
+            <strong>from beginners </strong>
+            learning the basics of sketching with graphite and charcoal{" "}
+            <strong>to advanced artists </strong> perfecting hyper-realism.
+            Whether you join
+            <strong> virtually or in person</strong>, I'm here to guide you
+            through every stroke on your journey to mastering the art you love.
+          </p>
+          <p>
+            Interested in a personalized workshop or have specific requirements?{" "}
+            <strong>Reach out to me</strong>, and let’s make art happen
+            together!
           </p>
         </div>
         <div className="container-buttons mt-2 mb-4">
@@ -181,6 +190,65 @@ const Home: FC<HomeProps> = () => {
       <div className="services padded-container">
         <div className="container-title">
           <p>Services</p>
+        </div>
+
+        <div className="services-container">
+          <div className="service-card">
+            <div className="service-image">
+              <img src="assets/frame_gift.jpeg" alt="Custom Artwork Creation" />
+            </div>
+            <div className="service-content">
+              <h4>Bespoke Art Tailored to Your Imagination</h4>
+              <ul>
+                <li>Personalized portraits that capture essence and emotion</li>
+                <li>Custom-designed artworks for unique home decor</li>
+                <li>Perfect for gifts, commemorating special occasions</li>
+              </ul>
+              <Button variant="primary" className="service-button">Commission Your Vision</Button>
+            </div>
+          </div>
+
+          <div className="service-card">
+            <div className="service-image">
+              <img src="assets/buddha_mural.jpeg" alt="Large Scale Works" />
+            </div>
+            <div className="service-content">
+              <h4>Transform Spaces with Captivating Murals</h4>
+              <ul>
+                <li>
+                  Eye-catching murals for businesses, schools, and public spaces
+                </li>
+                <li>
+                  Enhance your community with large-scale visual storytelling
+                </li>
+                <li>Durable, high-quality materials for lasting impact</li>
+              </ul>
+              <Button variant="primary" className="service-button">Envision Bigger</Button>
+            </div>
+          </div>
+
+          <div className="service-card">
+            <div className="service-image">
+              <img
+                src="assets/digital_illustration.jpeg"
+                alt="Digital Illustrations"
+              />
+            </div>
+            <div className="service-content">
+              <h4>Digital Artwork for Modern Needs</h4>
+              <ul>
+                <li>
+                  Vibrant illustrations for digital media, books, and
+                  advertising
+                </li>
+                <li>
+                  Tailored graphics for websites, apps, and online content
+                </li>
+                <li>Quick turnaround to meet business timelines</li>
+              </ul>
+              <Button variant="primary" className="service-button">Digitalize Your Vision</Button>
+            </div>
+          </div>
         </div>
       </div>
 
