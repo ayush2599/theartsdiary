@@ -230,25 +230,56 @@
 
 .container-images {
   display: flex;
-  align-content: center;
-  justify-content: space-between;
-  width: 80%;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Allows absolute positioning inside */
   margin-top: 20px;
+  gap: 20px; /* Adds space between images */
 }
 
 .workshop-img {
-  width: 350px;
-  height: 350px;
-  border-top-right-radius: 30px; /* Rounded top-right corner */
-  border-bottom-left-radius: 30px; /* Rounded bottom-left corner */
-  border-top-left-radius: 0px; /* Rounded top-right corner */
-  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth transformation on hover */
+  border-radius: 15px; /* Adds rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds shadow for depth */
 }
 
-.workshop-img:nth-child(2) {
-  margin-top: 50px;
+.center-image {
+  width: 240px;
+  height: 340px;
+  z-index: 2; /* Ensures it's on top */
 }
+
+.side-image {
+  position: relative;
+  z-index: 1; /* Lower z-index than center image */
+}
+
+/* Hover effects for interactivity */
+.workshop-img:hover {
+  transform: scale(1.05); /* Slightly enlarges the image */
+  z-index: 3; /* Ensures the hovered image is above others */
+}
+
+.workshop-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1em; /* Adds spacing between paragraphs */
+}
+
+.workshop-text strong {
+  font-weight: bold;
+  color: var(--highlight-color); /* Adjust this color to fit your theme */
+}
+
+.workshop-text {
+  padding: 20px;
+  margin: 20px 0; /* Adds vertical spacing around the text block */
+  text-align: justify;
+}
+
 .container-text {
   width: 80%;
   margin: auto;
@@ -324,6 +355,87 @@
   color: var(--text-darkonlightbg-color);
 }
 
+/* Services Section */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 20px 0;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+}
+
+.service-card {
+  background: var(--dim-white-color);
+  color: var(--dim-black-color);
+  text-align: center;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+  height: 100%;
+  border-radius: 0 15px 0 15px;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.25);
+}
+
+.service-content{
+  padding: 20px;
+}
+
+.service-image img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures images cover the area nicely */
+  border-top-right-radius: 15px;
+}
+
+.service-card h4 {
+  margin-top: 0px;
+}
+
+.service-card ul {
+  text-align: left;
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 10px 0;
+}
+
+.service-card ul li {
+  padding: 5px 0; /* Space out list items */
+}
+
+.service-card button {
+  margin-top: auto; /* Pushes the button to the bottom */
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0 15px 0 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #231d1d; /* Grey close to white */
+  border: 2px solid #231d1d; /* Remove default border */
+  color: #ffffff; /* Darker text color for contrast */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+  border-top-left-radius: 0px; /* Rounded top-right corner */
+  border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-weight: 500;
+}
+
+.service-card button:hover {
+  background-color: #fff; /* Slightly darker on hover for visual feedback */
+  color: #231d1d;
+  border: 2px solid #231d1d; /* Remove default border */
+}
+
 .testimonials {
   background-color: var(--light-background-color);
   display: flex;
@@ -369,15 +481,21 @@
   }
 
   .workshop-img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 300px;
   }
-  .workshop-img:nth-child(2) {
-    margin-top: 30px;
+  .center-image {
+    width: 200px;
+    height: 300px;
   }
 
-  .workshop-img:nth-child(3) {
-    margin-top: 30px;
+  .services-container {
+    grid-template-columns: 1fr; /* One column on small screens */
+    width: 80%;
+  }
+
+  .service-card {
+    margin-bottom: 20px; /* Adds space between cards on mobile */
   }
 
   .testimonial-container {

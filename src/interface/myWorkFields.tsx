@@ -9,6 +9,7 @@ export interface myWorkFields {
     imageLink: string;
     thumbLink: string;
     instaPostLink: string;
+    isFeatured: boolean;
   }
 
 export interface testimonialFields {
