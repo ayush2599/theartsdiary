@@ -18,7 +18,8 @@ const Contact: FC<ContactProps> = () => (
         <img src="assets/logo.png" alt="The Arts Diary Logo" className="brand-logo" />
         <h2>The Arts Diary</h2>
         <div className="contact-info">
-          <p><FontAwesomeIcon icon={faPhone} /> +91 8300875021 | +977 9841830776</p>
+          <p><FontAwesomeIcon icon={faPhone} /> +91 8300875021</p>
+          <p><FontAwesomeIcon icon={faPhone} /> +977 9841830776</p>
           <p><FontAwesomeIcon icon={faEnvelope} /> theartsdiary@gmail.com</p>
         </div>
         <div className="social-media-icons">
