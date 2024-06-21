@@ -99,6 +99,18 @@ const Home: FC<HomeProps> = () => {
     prevArrow: <EmptyArrow />, // Hides the previous arrow
   };
 
+  const getColumnCount = (count: number) => {
+    if (count === 1) return 1;
+    if (count === 2) return 2;
+    if (count === 3) return 3;
+    if (count === 4) return 2;
+    if (count === 5) return 3;
+    if (count === 6) return 3;
+    if (count === 7) return 2;
+    return 3;
+  };
+
+
   return (
     <div className="Home">
       <div className="header-image-container">
@@ -119,7 +131,7 @@ const Home: FC<HomeProps> = () => {
           <p>Featured Artworks</p>
         </div>
         <div className="container">
-          <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={gapSize}>
+          <Masonry columns={{ 400: 1, 768: 2, 1024: getColumnCount(myWorks.length) }} gap={gapSize}>
             {myWorks.map((work) => (
               <div key={work.title}>
                 <Card className="custom-card">
@@ -149,15 +161,18 @@ const Home: FC<HomeProps> = () => {
         <div className="container-images">
           <img
             className="workshop-img side-image"
-            src="https://picsum.photos/200/300?1"
+            src="assets/workshop_1.jpg"
+            alt="Virtual Sketch workshop"
           />
           <img
             className="workshop-img center-image"
-            src="https://picsum.photos/220/320?2"
+            src="assets/workshop_2.jpg"
+            alt="Live Sketch workshop"
           />
           <img
             className="workshop-img side-image"
-            src="https://picsum.photos/200/300?3"
+            src="assets/workshop_3.jpg"
+            alt="Student at live workshop"
           />
         </div>
         <div className="container-text workshop-text">

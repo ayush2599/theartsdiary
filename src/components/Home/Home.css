@@ -48,6 +48,7 @@
 
 .cta-buttons .btn {
   margin: 5px;
+  font-weight: 700;
 }
 
 /* Custom styles for 'Place an Order' button */
@@ -61,11 +62,10 @@
   border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
   padding: 10px 20px; /* Adequate padding for better button visibility */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
-  font-weight: 500;
 }
 
 .cta-buttons .btn-read-story {
-  background: none;
+  background: #ffffff36;
   border: 2px solid var(--permanent-white-color); /* Remove default border */
   color: var(--permanent-white-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
@@ -74,20 +74,31 @@
   border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
   padding: 10px 20px; /* Adequate padding for better button visibility */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
-  font-weight: 500;
 }
 
 /* Custom styles for 'Place an Order' button */
-.cta-buttons .btn-place-order:hover {
-  background: none; /* Grey close to white */
-  border: 2px solid var(--permanent-white-color); /* Remove default border */
-  color: var(--permanent-white-color); /* Darker text color for contrast */
+.cta-buttons .btn-place-order:hover,
+.cta-buttons .btn-place-order:focus,
+.cta-buttons .btn-place-order:active {
+  background: #ffffff36 !important;
+  border: 2px solid var(--permanent-white-color) !important; /* Remove default border */
+  color: var(
+    --permanent-white-color
+  ) !important; /* Darker text color for contrast */
+  box-shadow: none !important;
 }
 
-.cta-buttons .btn-read-story:hover {
-  background-color: var(--permanent-white-color); /* Grey close to white */
-  border: 2px solid var(--permanent-white-color); /* Remove default border */
-  color: var(--permanent-dark-color); /* Darker text color for contrast */
+.cta-buttons .btn-read-story:hover,
+.cta-buttons .btn-read-story:focus,
+.cta-buttons .btn-read-story:active {
+  background-color: var(
+    --permanent-white-color
+  ) !important; /* Grey close to white */
+  border: 2px solid var(--permanent-white-color) !important; /* Remove default border */
+  color: var(
+    --permanent-dark-color
+  ) !important; /* Darker text color for contrast */
+  box-shadow: none !important;
 }
 
 .padded-container {
@@ -101,6 +112,9 @@
   font-size: 25px;
   font-weight: 700;
   padding-bottom: 20px;
+  font-family: "Syne-Bold", sans-serif;
+  transform: scaleY(1.2);
+  letter-spacing: 1.2px;
 }
 
 .featured-artworks {
@@ -112,11 +126,13 @@
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
-  background: linear-gradient(to bottom, var(--wood-color-top) 60%, var(--wood-color-bottom) 100%);
-  box-shadow: 
-    inset 0 2px 2px var(--inner-highlight),
-    inset 0 -2px 2px var(--inner-shadow),
-    0 5px 10px var(--outer-shadow),
+  background: linear-gradient(
+    to bottom,
+    var(--wood-color-top) 60%,
+    var(--wood-color-bottom) 100%
+  );
+  box-shadow: inset 0 2px 2px var(--inner-highlight),
+    inset 0 -2px 2px var(--inner-shadow), 0 5px 10px var(--outer-shadow),
     0 -5px 10px var(--outer-highlight);
   padding: 20px; /* Size of the white border */
   border-radius: 0px !important; /* Adjust for desired rounded corners on the outer border */
@@ -165,29 +181,29 @@
 }
 
 .container-buttons .btn-container-action {
-  background-color: #231d1d; /* Grey close to white */
-  border: 2px solid #231d1d; /* Remove default border */
-  color: #ffffff; /* Darker text color for contrast */
+  background-color: var(--permanent-dark-color); /* Grey close to white */
+  border: 2px solid var(--permanent-dark-color); /* Remove default border */
+  color: var(--permanent-white-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
   border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
   border-top-left-radius: 0px; /* Rounded top-right corner */
   border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
   padding: 10px 20px; /* Adequate padding for better button visibility */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .container-buttons .btn-container-action-inverted {
   background: none; /* Grey close to white */
-  border: 2px solid #fff; /* Remove default border */
-  color: #fff; /* Darker text color for contrast */
+  border: 2px solid var(--permanent-white-color); /* Remove default border */
+  color: var(--permanent-white-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
   border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
   border-top-left-radius: 0px; /* Rounded top-right corner */
   border-bottom-right-radius: 0px; /* Rounded bottom-left corner */
   padding: 10px 20px; /* Adequate padding for better button visibility */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .container-buttons {
@@ -197,16 +213,22 @@
   align-content: center;
 }
 
-.container-buttons .btn-container-action:hover {
-  background-color: #fff; /* Slightly darker on hover for visual feedback */
-  color: #231d1d;
-  border: 2px solid #231d1d; /* Remove default border */
+.container-buttons .btn-container-action:hover,
+.container-buttons .btn-container-action:focus,
+.container-buttons .btn-container-action:active {
+  background-color: var(--permanent-white-color) !important; /* Slightly darker on hover for visual feedback */
+  color: var(--permanent-dark-color) !important;
+  border: 2px solid var(--permanent-dark-color) !important; /* Remove default border */
+  box-shadow: none !important;
 }
 
-.container-buttons .btn-container-action-inverted:hover {
-  background-color: #fff; /* Grey close to white */
-  border: 2px solid #fff; /* Remove default border */
-  color: #231d1d; /* Darker text color for contrast */
+.container-buttons .btn-container-action-inverted:hover,
+.container-buttons .btn-container-action-inverted:focus,
+.container-buttons .btn-container-action-inverted:active {
+  background-color: #fff !important; /* Grey close to white */
+  border: 2px solid #fff !important; /* Remove default border */
+  color: var(--permanent-dark-color) !important; /* Darker text color for contrast */
+  box-shadow: none !important;
 }
 
 .container-buttons-inverted {
@@ -238,8 +260,8 @@
 }
 
 .workshop-img {
-  width: 200px;
-  height: 300px;
+  width: 280px;
+  height: 400px;
   object-fit: cover;
   transition: transform 0.3s ease; /* Smooth transformation on hover */
   border-radius: 15px; /* Adds rounded corners */
@@ -247,8 +269,8 @@
 }
 
 .center-image {
-  width: 240px;
-  height: 340px;
+  width: 340px;
+  height: 480px;
   z-index: 2; /* Ensures it's on top */
 }
 
@@ -275,7 +297,6 @@
 }
 
 .workshop-text {
-  padding: 20px;
   margin: 20px 0; /* Adds vertical spacing around the text block */
   text-align: justify;
 }
@@ -373,8 +394,8 @@
   padding: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  justify-content: space-between;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
   height: 100%;
   border-radius: 0 15px 0 15px;
@@ -382,10 +403,10 @@
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.25);
 }
 
-.service-content{
+.service-content {
   padding: 20px;
 }
 
@@ -398,10 +419,11 @@
 
 .service-card h4 {
   margin-top: 0px;
+  font-weight: 600;
 }
 
 .service-card ul {
-  text-align: left;
+  text-align: center;
   list-style: none; /* Remove default list styling */
   padding: 0;
   margin: 10px 0;
@@ -419,9 +441,9 @@
   border-radius: 0 15px 0 15px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #231d1d; /* Grey close to white */
-  border: 2px solid #231d1d; /* Remove default border */
-  color: #ffffff; /* Darker text color for contrast */
+  background-color: var(--permanent-dark-color); /* Grey close to white */
+  border: 2px solid var(--permanent-dark-color); /* Remove default border */
+  color: var(--permanent-white-color); /* Darker text color for contrast */
   border-top-right-radius: 10px; /* Rounded top-right corner */
   border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
   border-top-left-radius: 0px; /* Rounded top-right corner */
@@ -430,10 +452,13 @@
   font-weight: 500;
 }
 
-.service-card button:hover {
-  background-color: #fff; /* Slightly darker on hover for visual feedback */
-  color: #231d1d;
-  border: 2px solid #231d1d; /* Remove default border */
+.service-card button:hover,
+.service-card button:focus,
+.service-card button:active {
+  background-color: var(--permanent-white-color) !important; /* Slightly darker on hover for visual feedback */
+  color: var(--permanent-dark-color) !important;
+  border: 2px solid var(--permanent-dark-color) !important; /* Remove default border */
+  box-shadow: none !important;
 }
 
 .testimonials {
@@ -445,8 +470,6 @@
   padding-bottom: 40px;
   color: var(--text-darkonlightbg-color);
 }
-
-
 
 @media (max-width: 768px) {
   .header-image-container {
@@ -472,7 +495,7 @@
     object-position: 50% 15%;
   }
 
-  .workshops .container-images{
+  .workshops .container-images {
     display: flex;
     flex-direction: column;
     align-content: center;
