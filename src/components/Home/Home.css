@@ -495,6 +495,10 @@
     object-position: 50% 15%;
   }
 
+  .container-title {
+    letter-spacing: 1px;
+  }
+
   .workshops .container-images {
     display: flex;
     flex-direction: column;
