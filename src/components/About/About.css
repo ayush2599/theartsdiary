@@ -1,1 +1,36 @@
-.About {}
+.about {
+    background-color: var(--light-background-color);
+    color: var(--text-darkonlightbg-color);
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content vertically */
+  }
+  
+  .about-container-image img {
+    width: 100%; /* Ensures the image is responsive */
+    max-width: 280px;
+    height: auto;
+    border-radius: 10px; /* Optional: adds rounded corners to the image */
+  }
+  
+  .about-container-text p {
+    text-align: justify; /* Justifies the text */
+    margin-top: 20px; /* Adds spacing between paragraphs */
+  }
+
+  .about h3 {
+    font-size: 22px;
+    font-style: italic; /* This will make the text italic */
+    margin-top: 20px; /* Adds spacing above each heading */
+    margin-bottom: 10px; /* Adds a little space below the heading */
+  }
+  
+  blockquote {
+    font-style: italic;
+    margin: 30px 0;
+    padding: 10px 20px;
+    border-left: 5px solid var(--dim-black-color);
+  }

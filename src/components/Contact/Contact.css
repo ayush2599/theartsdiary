@@ -1,1 +1,121 @@
-.Contact {}
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: var(--light-background-color);
+    color: var(--text-darkonlightbg-color);
+    flex-direction: column;
+  }
+  
+  .contact-content {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    width: 80%;
+    flex-wrap: wrap; /* Allows content to wrap on smaller screens */
+  }
+  
+  .branding {
+    width: 40%;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .brand-logo {
+    width: 100%;
+    max-width: 90px;
+    height: auto;
+    padding-bottom: 10px;
+    filter:var(--invert-filter);
+  }
+  
+  .branding h2 {
+    margin: 10px 0;
+    font-size: 30px;
+    font-family: "Syne-Bold", sans-serif;
+
+  }
+  
+  .contact-info{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-info p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .contact-info svg {
+    margin-right: 10px;
+  }
+  
+  .social-media-icons{
+    margin-top: 5px;
+  }
+  .social-media-icons a {
+    font-size: 24px;
+    color: var(--text-darkonlightbg-color);
+    margin: 0 10px;
+  }
+  
+  .social-media-icons a:hover {
+    color: var(--dim-white-color);
+  }
+  
+  .contact-form {
+    width: 60%;
+    padding: 20px;
+  }
+  
+  .contact-form h3 {
+    font-style: italic;
+  }
+  
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dim-white-color);
+    color: var(--permanent-dark-color);
+  }
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .contact-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .branding, .contact-form {
+      width: 100%; /* Full width on smaller screens */
+      text-align: center;
+    }
+  
+    .social-media-icons a {
+      font-size: 20px; /* Slightly smaller icons on mobile */
+    }
+  
+    .contact-form {
+      width: 90%; /* Give some padding on the sides */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contact-info p {
+      font-size: 14px; /* Smaller font size for contact info */
+    }
+  }
+  
