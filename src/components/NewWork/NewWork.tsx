@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
-import { Form, Button, Container, Toast, Image } from "react-bootstrap";
+import { Form, Button, Container, Image } from "react-bootstrap";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import { myWorkFields } from "../../interface/myWorkFields";
 import "./NewWork.css";
+import CustomToast from "../CustomToast/CustomToast";
 
 interface NewWorkProps {}
 
@@ -28,7 +29,7 @@ const NewWork: FC<NewWorkProps> = () => {
   const [showToast, setShowToast] = useState({
     show: false,
     message: "",
-    type: "success",
+    type: 'success' as 'success' | 'error'
   });
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -257,35 +258,13 @@ const NewWork: FC<NewWorkProps> = () => {
             {isEditing ? "Update" : "Submit"}
           </Button>
         </Form>
-        <Toast
-          show={showToast.show}
-          onClose={() => setShowToast({ ...showToast, show: false })}
-          delay={3000}
-          autohide
-          style={{
-            position: "fixed",
-            zIndex: 30,
-            bottom: "20px",
-            right: "20px",
-            backgroundColor:
-              showToast.type === "success"
-                ? "rgba(0, 255, 0, 0.85)"
-                : "rgba(255, 0, 0, 0.85)",
-          }}
-        >
-          <Toast.Header
-            style={{
-              backgroundColor:
-                showToast.type === "success" ? "#3b3b3b" : "#ff0000",
-              color: "#fff",
-            }}
-          >
-            <strong className="mr-auto">
-              {showToast.type === "success" ? "Success" : "Error"}
-            </strong>
-          </Toast.Header>
-          <Toast.Body>{showToast.message}</Toast.Body>
-        </Toast>
+        <CustomToast
+                show={showToast.show}
+                message={showToast.message}
+                onClose={() => setShowToast({ ...showToast, show: false })}
+                type={showToast.type}
+                delay={3000}
+            />
       </Container>
     </div>
   );

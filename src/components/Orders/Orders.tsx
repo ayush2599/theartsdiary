@@ -1,16 +1,19 @@
 import React, { FC, useEffect, useState } from "react";
 import "./Orders.css";
 import { myWork } from "../../interface/myWork";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { Timestamp, addDoc, collection, getDocs } from "firebase/firestore";
+import { db, storage } from "../../firebase";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Badge, Toast } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Accordion, Card, Button, Form, Row, Col } from "react-bootstrap";
+import { Card, Button, Form, Row, Col } from "react-bootstrap";
 import country_codes from "../../constants/country_code.json";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { OrderFormData } from "../../interface/OrderFormData";
+import CustomToast from "../CustomToast/CustomToast";
 
 interface FAQItem {
   question: string;
@@ -22,20 +25,37 @@ interface OrdersProps {}
 const Orders: FC<OrdersProps> = () => {
   const [myWorks, setMyWorks] = useState<myWork[]>([]);
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
-  const [showToast, setShowToast] = useState(false);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [showToast, setShowToast] = useState({
+    show: false,
+    message: "",
+    type: "success" as "success" | "error",
+  });
+  const [orderType, setOrderType] = useState("");
+  const [formData, setFormData] = useState<OrderFormData>({
+    artworkType: "",
+    communication: "",
+    contactNumber: "",
+    countryCode: "",
+    deliveryLocation: "",
+    description: "",
+    email: "",
+    instagramUsername: "",
+    name: "",
+    referenceImages: [],
+  });
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
   useEffect(() => {
-    document.title = "Orders | The Arts Diary"; 
+    document.title = "Orders | The Arts Diary";
     const fetchMyWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];
       querySnapshot.forEach((doc) => {
-        console.log("Pushed: " + doc.data().title);
         worksData.push(doc.data() as myWork);
       });
       worksData.sort((a, b) => b.year - a.year);
@@ -73,15 +93,23 @@ const Orders: FC<OrdersProps> = () => {
       to_name: "Ayush",
       message: message,
     };
-  
-    emailjs.send("service_fk0i5tc", "template_y4bjyb9", templateParams, "i-tIKh4WccTEswjQ8")
-      .then(response => {
-        console.log('SUCCESS!', response.status, response.text);
-      }, err => {
-        console.log('FAILED...', err);
-      });
+
+    emailjs
+      .send(
+        "service_fk0i5tc",
+        "template_y4bjyb9",
+        templateParams,
+        "i-tIKh4WccTEswjQ8"
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+        }
+      );
   };
-  
 
   const settings = {
     dots: true,
@@ -132,60 +160,202 @@ const Orders: FC<OrdersProps> = () => {
     ],
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  function validateFormData(data: OrderFormData): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation regex
 
-    const formData = {
-      name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement)
-        .value,
-      communication: (
-        e.currentTarget.elements.namedItem("communication") as HTMLInputElement
-      ).value,
-      email: (e.currentTarget.elements.namedItem("user-email") as HTMLInputElement)
-        .value,
-      countryCode: (
-        e.currentTarget.elements.namedItem("countryCode") as HTMLSelectElement
-      ).value,
-      contactNumber: (
-        e.currentTarget.elements.namedItem("contactNumber") as HTMLInputElement
-      ).value,
-      instagramUsername: (
-        e.currentTarget.elements.namedItem(
-          "instagramUsername"
-        ) as HTMLInputElement
-      ).value,
-      artworkType: (
-        e.currentTarget.elements.namedItem("artworkType") as HTMLSelectElement
-      ).value,
-      description: (
-        e.currentTarget.elements.namedItem("description") as HTMLTextAreaElement
-      ).value,
-      deliveryLocation: (
-        e.currentTarget.elements.namedItem(
-          "deliveryLocation"
-        ) as HTMLTextAreaElement
-      ).value,
-      expectedDeliveryDate: (
-        e.currentTarget.elements.namedItem(
-          "expectedDeliveryDate"
-        ) as HTMLInputElement
-      ).value,
-      offerCode: (
-        e.currentTarget.elements.namedItem("offerCode") as HTMLInputElement
-      ).value,
+    if (!data.artworkType) {
+      setShowToast({
+        show: true,
+        message: "Artwork type is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.communication) {
+      setShowToast({
+        show: true,
+        message: "Preferred mode of communication is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.contactNumber) {
+      setShowToast({
+        show: true,
+        message: "Contact number is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.countryCode) {
+      setShowToast({
+        show: true,
+        message: "Country code is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.deliveryLocation) {
+      setShowToast({
+        show: true,
+        message: "Delivery location is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.description) {
+      setShowToast({
+        show: true,
+        message: "Description of the artwork is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.email) {
+      setShowToast({
+        show: true,
+        message: "Email is required.",
+        type: "error",
+      });
+      return false;
+    } else if (!emailRegex.test(data.email)) {
+      setShowToast({
+        show: true,
+        message: "Please enter a valid email address.",
+        type: "error",
+      });
+      return false;
+    }
+
+    if (!data.name) {
+      setShowToast({
+        show: true,
+        message: "Name is required.",
+        type: "error",
+      });
+      return false;
+    }
+
+    // Additional checks can be added as needed
+    return true; // If all validations pass
+  }
+
+  const [step, setStep] = useState(1);
+
+  const handleInputChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const filesArray = Array.from(event.target.files);
+      setSelectedFiles(filesArray);
+
+      const fileReaders = filesArray.map((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        return reader;
+      });
+
+      const images = fileReaders.map((reader) => {
+        return new Promise<string>((resolve) => {
+          reader.onload = () => resolve(reader.result as string);
+        });
+      });
+    }
+  };
+
+  const handleNextStep = () => {
+    // Example validation check
+    if (step === 1 && formData.artworkType && formData.description) {
+      setStep(2);
+    } else {
+      setShowToast({
+        show: true,
+        message: "Please complete all required fields.",
+        type: "error",
+      });
+    }
+  };
+
+  const handlePreviousStep = () => {
+    setStep((prev) => prev - 1);
+  };
+
+  const uploadImages = async (): Promise<string[]> => {
+    const urls = await Promise.all(
+      selectedFiles.map(async (file) => {
+        const fileRef = ref(storage, `orders/images/${file.name}`);
+        await uploadBytes(fileRef, file);
+        return getDownloadURL(fileRef);
+      })
+    );
+    return urls;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Validate form data here as per your validation function
+    if (!validateFormData(formData)) {
+      return;
+    }
+
+    const imageUrls = await uploadImages(); // Upload images and get URLs
+    const fullFormData = {
+      ...formData,
+      referenceImages: imageUrls, // Add URLs to form data
+      insertedOn: Timestamp.fromDate(new Date()), // Set the timestamp
     };
 
     try {
-      await addDoc(collection(db, "orders"), formData);
-      sendEmail(formData.name, JSON.stringify(formData))
-      setShowToast(true);
+      await addDoc(collection(db, "orders"), fullFormData);
+      sendEmail(formData.name, JSON.stringify(formData));
+      setShowToast({
+        show: true,
+        message: "Order received successfully! We will get back to you soon.",
+        type: "success",
+      });
+
+      setTimeout(() => {
+        setFormData({
+          artworkType: "",
+          communication: "",
+          contactNumber: "",
+          countryCode: "",
+          deliveryLocation: "",
+          description: "",
+          email: "",
+          instagramUsername: "",
+          name: "",
+          referenceImages: [],
+        });
+        setSelectedFiles([]);
+        setStep(1);
+      }, 4000);
     } catch (error) {
-      console.error("Error submitting the request: ", error);
+      console.error("Failed to submit order:", error);
+      setShowToast({
+        show: true,
+        message: "Failed to place the order.",
+        type: "error",
+      });
     }
   };
 
   return (
-    <div className="Orders">
+    <div className="Orders padded-container">
       <div className="recent-works">
         <div className="container-title">
           <p>Recent Comisssions</p>
@@ -212,7 +382,7 @@ const Orders: FC<OrdersProps> = () => {
           ))}
         </Slider>
       </div>
-      <div className="order-place mt-4">
+      <div className="order-place mt-5">
         <div className="container-title">
           <p>Order Your Custom Artwork or Portrait Today!</p>
         </div>
@@ -229,15 +399,13 @@ const Orders: FC<OrdersProps> = () => {
             life
           </p>
         </div>
-        <div className="container-content">
+        <div className="container-content mt-4">
           <div className="highlights">
             <div className="row">
               <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
                 <img
                   className="highlight-img"
                   src="/assets/personalized_artwork.jpeg"
-                  width="180"
-                  height="180"
                   alt="personalized artwork highlight"
                 />
                 <div className="highlight-desc mt-2">
@@ -248,8 +416,6 @@ const Orders: FC<OrdersProps> = () => {
                 <img
                   className="highlight-img"
                   src="/assets/quality_materials.jpeg"
-                  width="180"
-                  height="180"
                   alt="quality materials highlight"
                 />
                 <span className="highlight-desc mt-2">
@@ -260,8 +426,6 @@ const Orders: FC<OrdersProps> = () => {
                 <img
                   className="highlight-img"
                   src="/assets/easy_order.jpeg"
-                  width="180"
-                  height="180"
                   alt="easy ordering highlight"
                 />
                 <span className="highlight-desc mt-2">
@@ -272,8 +436,6 @@ const Orders: FC<OrdersProps> = () => {
                 <img
                   className="highlight-img"
                   src="/assets/happy_customer.jpeg"
-                  width="180"
-                  height="180"
                   alt="happy constomer highlight"
                 />
                 <span className="highlight-desc mt-2">
@@ -282,225 +444,257 @@ const Orders: FC<OrdersProps> = () => {
               </div>
             </div>
           </div>
-          <div className="order-form mt-3 mx-auto">
-            <h2>Place Your Order</h2>
-            <p>
-              We will contact you within 24 hours of placing the order to
-              understand your requirements and process your order.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <div className="row">
-                <div className="form-group">
-                  <label htmlFor="name">
-                    Name<span className="text-danger">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    placeholder="Enter your name"
-                    required
-                  />
+          <div className="order-form-container mt-5">
+            <div className="order-form-image">
+              <img
+                className="order-form-image-img"
+                src="/assets/wall_mockup_beautyWithin.jpg"
+                alt="Transform Your Space into Timless Art"
+              />
+            </div>
+            {/* Steps to Order */}
+            <div className="order-process">
+              <div className="container-title pb-2">
+                <h3>Start Your Artistic Adventure</h3>
+              </div>
+              <div className="steps-container">
+                <div className="step">
+                  <div className="step-circle">1</div>
+                  <div className="step-text">Share your vision with us.</div>
+                </div>
+                <div className="step">
+                  <div className="step-circle">2</div>
+                  <div className="step-text">
+                    We'll explore ideas together in a consultation.
+                  </div>
+                </div>
+                <div className="step">
+                  <div className="step-circle">3</div>
+                  <div className="step-text">
+                    We finalize the masterpiece and bring it to life.
+                  </div>
                 </div>
               </div>
 
-              <div className="form-group row">
-                <label className="col-md-5">
-                  Preferred Mode of Communication
-                  <span className="text-danger">*</span>
-                </label>
-                <div className="form-check col-md-2">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="communication"
-                    id="email"
-                    value="email"
-                    required
-                  />
-                  <label className="form-check-label" htmlFor="email">
-                    Email
-                  </label>
-                </div>
-                <div className="form-check col-md-2">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="communication"
-                    id="whatsapp"
-                    value="whatsapp"
-                  />
-                  <label className="form-check-label" htmlFor="whatsapp">
-                    Whatsapp
-                  </label>
-                </div>
-                <div className="form-check col-md-2">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="communication"
-                    id="instagram"
-                    value="instagram"
-                  />
-                  <label className="form-check-label" htmlFor="instagram">
-                    Instagram
-                  </label>
-                </div>
-              </div>
+              <Form onSubmit={handleSubmit}>
+                {step === 1 && (
+                  <>
+                    <div className="order-type-selection">
+                      <Form.Label>Select order type</Form.Label>
+                      <div className="card-container">
+                        {[
+                          "B/W Portrait",
+                          "Colour Portrait",
+                          "Large Scale Work",
+                          "Digital Illustration",
+                          "Others",
+                        ].map((type, index) => (
+                          <Card
+                            key={index}
+                            className={`order-type-card ${
+                              formData.artworkType === type ? "selected" : ""
+                            }`}
+                            onClick={() =>
+                              setFormData({ ...formData, artworkType: type })
+                            }
+                          >
+                            <Card.Body>{type}</Card.Body>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+                    <Form.Group controlId="description">
+                      <Form.Label>Tell us your vision</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="imageUpload">
+                      <Form.Label>Reference Images (if available)</Form.Label>
+                      <Form.Control
+                        type="file"
+                        multiple
+                        onChange={handleFileChange}
+                      />
+                    </Form.Group>
+                    <div className="container-buttons">
+                      <Button
+                        onClick={handleNextStep}
+                        className="btn-container-action-inverted mt-4"
+                        style={{
+                          border: "2px solid var(--permanent-dark-color)",
+                          color: "var(--permanent-dark-color)",
+                        }}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  </>
+                )}
 
-              <div className="form-group ">
-                <label htmlFor="email">Email*</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="user-email"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+                {step === 2 && (
+                  <>
+                    <Row>
+                      <Col md={6}>
+                        <Form.Group controlId="name">
+                          <Form.Label>Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Full Name"
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group controlId="email">
+                          <Form.Label>Email</Form.Label>
+                          <Form.Control
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="Email"
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={3}>
+                        <Form.Group controlId="email">
+                          <Form.Label>Country Code</Form.Label>
+                          <Form.Control
+                            as="select"
+                            name="countryCode"
+                            value={formData.countryCode}
+                            onChange={handleInputChange}
+                          >
+                            <option value="">+XXX</option>
+                            {country_codes.country_code.map((code, index) => (
+                              <option key={index} value={code.dial_code}>
+                                {code.code} ({code.dial_code})
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col md={4}>
+                        <Form.Group controlId="email">
+                          <Form.Label>Mobile Number</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="contactNumber"
+                            value={formData.contactNumber}
+                            onChange={handleInputChange}
+                            placeholder="123-4567-890"
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col md={5}>
+                        <Form.Group controlId="instagramUsername">
+                          <Form.Label>Instagram Username</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="instagramUsername"
+                            value={formData.instagramUsername}
+                            onChange={handleInputChange}
+                            placeholder="@"
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
 
-              <div className="form-group row">
-                <label htmlFor="contactNumber">Contact Number*</label>
-                <div className="form-group col-md-2">
-                  <select
-                    className="custom-select form-control"
-                    id="countryCode"
-                    required
-                  >
-                    <option selected value="" disabled>
-                      {" "}
-                      + XXX
-                    </option>
-                    {country_codes.country_code.map((country, index) => (
-                      <option key={index} value={country.dial_code}>
-                        {country.code} ({country.dial_code})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group col-md-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="contactNumber"
-                    placeholder="Contact number (preferably whatsapp)"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="instagramUsername">Instagram username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="instagramUsername"
-                  placeholder="Enter your Instagram username"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="artworkType">
-                  Artwork Type<span className="text-danger">*</span>
-                </label>
-                <select className="form-control" id="artworkType" required>
-                  <option value="" disabled selected>
-                    Select the artwork type
-                  </option>
-                  <option>B/W Portrait</option>
-                  <option>Colour Portrait</option>
-                  <option>Large Scale Work</option>
-                  <option>Digital Illustration</option>
-                  <option>Logo Design</option>
-                  <option>Others</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  rows={3}
-                  placeholder="Describe your requirements"
-                ></textarea>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="deliveryLocation">
-                  Delivery Location<span className="text-danger">*</span>
-                </label>
-                <textarea
-                  className="form-control"
-                  id="deliveryLocation"
-                  rows={3}
-                  placeholder="Enter delivery location details"
-                  required
-                ></textarea>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="expectedDeliveryDate">
-                  Expected Delivery Date
-                </label>
-                <input
-                  type="date"
-                  className="form-control"
-                  id="expectedDeliveryDate"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="offerCode">Offer Code</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="offerCode"
-                  placeholder="Enter offer code"
-                />
-              </div>
-
-              <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-outline-primary ">
-                  Place Order
-                </button>
-              </div>
-            </form>
-            <Toast
-              show={showToast}
-              onClose={() => setShowToast(false)}
-              delay={5000}
-              autohide
-              style={{
-                position: "fixed",
-                bottom: "20px",
-                right: "20px",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-              }}
-            >
-              <Toast.Header
-                style={{ backgroundColor: "#3b3b3b", color: "#fff" }}
-              >
-                <strong className="mr-auto">Success</strong>
-              </Toast.Header>
-              <Toast.Body>Order placed successfully!</Toast.Body>
-            </Toast>
+                    <div className="order-type-selection">
+                      <Form.Label>How shall we reach out</Form.Label>
+                      <div className="communication-card-container">
+                        {["Email", "Whatsapp", "Instagram"].map(
+                          (type, index) => (
+                            <Card
+                              key={index}
+                              className={`communication-type-card ${
+                                formData.communication === type
+                                  ? "selected"
+                                  : ""
+                              }`}
+                              onClick={() =>
+                                setFormData({
+                                  ...formData,
+                                  communication: type,
+                                })
+                              }
+                            >
+                              <Card.Body>{type}</Card.Body>
+                            </Card>
+                          )
+                        )}
+                      </div>
+                    </div>
+                    <Form.Group controlId="description">
+                      <Form.Label>Delivery Location</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name="deliveryLocation"
+                        value={formData.deliveryLocation}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <div className="container-buttons justify-content-between">
+                      <Button
+                        onClick={handlePreviousStep}
+                        className="btn-container-action-inverted mt-4"
+                        style={{
+                          border: "2px solid var(--permanent-dark-color)",
+                          color: "var(--permanent-dark-color)",
+                        }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="btn-container-action mt-4"
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </Form>
+            </div>
           </div>
         </div>
       </div>
-      <div className="faq-section">
+      <div className="faq-section mt-5 padded-container">
         <h2>Frequently Asked Questions</h2>
         {faqs.map((faq, index) => (
           <div key={index} className="faq-item">
-            <div className="faq-question" onClick={() => toggleFAQ(index)}>
+            <div
+              className={`faq-question ${openFAQ === index ? "open" : ""}`}
+              onClick={() => toggleFAQ(index)}
+            >
               {faq.question}
             </div>
             <div className={`faq-answer ${openFAQ === index ? "open" : ""}`}>
-              {faq.answer}
+              <p className="faq-answer-text">{faq.answer}</p>
             </div>
           </div>
         ))}
       </div>
+
+      <CustomToast
+        show={showToast.show}
+        message={showToast.message}
+        onClose={() => setShowToast({ ...showToast, show: false })}
+        type={showToast.type}
+        delay={3000}
+      />
     </div>
   );
 };

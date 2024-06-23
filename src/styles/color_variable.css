@@ -16,6 +16,7 @@
   --button-bg-color: #fff; /* Light background for the button in light mode */
   --button-text-color: #000; /* Dark text color in light mode */
   --button-hover-bg-color: #e0e0e0; 
+  --error-red-color: #ff0033;
 
   /* frame */
   --wood-color-top: #472828fa;
@@ -40,6 +41,7 @@
   --dim-white-color: #cac6c6;
   --dim-black-color: #282828;
   --text-darkonlightbg-color: #cac6c6;
+  --error-red-color: #ff0033;
   /* frame */
   --wood-color-top: #e8e8e8; /* Light wooden color top */
     --wood-color-bottom: #c2c2c2; /* Light wooden color bottom */

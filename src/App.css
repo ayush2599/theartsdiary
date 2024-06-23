@@ -28,7 +28,7 @@ html {
 
 body{
   font-family:  'Syne-Regular',sans-serif;
-  background-color: var(--light-background-color);
+  background-color: var(--light-background-color) !important;
 }
 .content-container{
   margin-left: 0px;
@@ -82,7 +82,7 @@ body{
   letter-spacing: 1.2px;
 }
 
-.container-buttons .btn-container-action {
+.container-buttons .btn-container-action, .btn-container-action {
   background-color: var(--permanent-dark-color); /* Grey close to white */
   border: 2px solid var(--permanent-dark-color); /* Remove default border */
   color: var(--permanent-white-color); /* Darker text color for contrast */

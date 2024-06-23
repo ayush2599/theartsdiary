@@ -25,7 +25,7 @@
   .about h3 {
     font-size: 22px;
     font-style: italic; /* This will make the text italic */
-    margin-top: 20px; /* Adds spacing above each heading */
+    margin-top: 30px; /* Adds spacing above each heading */
     margin-bottom: 10px; /* Adds a little space below the heading */
   }
   
