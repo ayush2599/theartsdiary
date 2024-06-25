@@ -230,14 +230,27 @@
   font-size: 1.15rem;
 }
 
+
+.testimonials {
+  background-color: var(--light-background-color);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  padding-bottom: 40px;
+  color: var(--text-darkonlightbg-color);
+}
+
 .testimonial-slider {
   width: 80%;
   margin: auto;
   padding-bottom: 30px;
+  overflow: visible !important;
 }
 .testimonial-container {
   display: flex;
   width: 50%;
+  min-height: 220px;
   max-width: 400px;
   flex-direction: column;
   align-items: center; /* Center align items for better control */
@@ -245,9 +258,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   background: var(--dim-white-color);
-  margin: 15px; /* Add margin for spacing between slides */
+  margin: 0px; /* Add margin for spacing between slides */
   position: relative; /* Needed for absolute positioning */
-  overflow: visible; /* Allow items to overlap container if necessary */
+  overflow: visible !important; /* Allow items to overlap container if necessary */
   color: var(--dim-black-color);
 }
 
@@ -259,33 +272,41 @@
   top: -35px;
   left: 10px;
   font-family: Arial, sans-serif;
+  overflow: visible;
 }
 
 .testimonial-text {
-  width: 90%; /* Adjust width to fit content */
+  width: 85%; /* Adjust width to fit content */
   text-align: center; /* Center the text */
   position: relative; /* Stack order control */
   z-index: 1; /* Ensure text is above the image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-evenly;
+  min-height: 210px;
 }
 
 .client-details {
   font-weight: bold;
   display: block; /* Ensure it takes up full width for layout */
-  margin-top: 10px; /* Space between review and client details */
+  margin-top: 2px; /* Space between review and client details */
 }
 
 .testimonial-image {
-  width: 30%; /* Adjust as per design */
+  width: 130px; /* Control image size */
+  height: 130px;
   position: absolute; /* Absolute positioning */
   top: 50%; /* Center vertically */
-  right: -80px; /* Half outside the container */
+  right: -65px; /* Half outside the container */
   transform: translateY(-50%); /* Align center with text vertically */
   z-index: 0; /* Below text */
 }
 
 .testimonial-image img {
-  width: 130px; /* Control image size */
-  height: 130px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--dim-white-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -381,16 +402,6 @@
   box-shadow: none !important;
 }
 
-.testimonials {
-  background-color: var(--light-background-color);
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  padding-bottom: 40px;
-  color: var(--text-darkonlightbg-color);
-}
-
 @media (max-width: 768px) {
   .header-image-container {
     justify-content: center; /* Center horizontally */
@@ -453,12 +464,17 @@
     margin-left: 0;
   }
 
+  .testimonial-text{
+    width: 100%;
+  }
+
   .testimonial-image {
     position: relative; /* Switch from absolute to relative */
-    width: 50%; /* Adjust width inside the container */
+    width: 130px; /* Adjust width inside the container */
+    height: 130px;
     right: 0; /* Reset right positioning */
     top: auto; /* Reset top positioning */
-    transform: translateY(0); /* Reset vertical translation */
+    transform: translateY(0px); /* Reset vertical translation */
     margin-top: 20px; /* Add some space between text and image */
     order: 3; /* Ensure the image comes last */
     margin-left: auto;
@@ -466,8 +482,12 @@
   }
 
   .testimonial-image img {
-    width: 130px; /* Optionally reduce image size */
-    height: 130px; /* Match width to maintain aspect ratio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .testimonial-text {

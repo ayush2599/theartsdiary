@@ -12,18 +12,17 @@ import { Card, Button, Form, Row, Col } from "react-bootstrap";
 import country_codes from "../../constants/country_code.json";
 import emailjs from "emailjs-com";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { OrderFormData } from "../../interface/OrderFormData";
+import { OrderFormDataField } from "../../interface/OrderFormData";
 import CustomToast from "../CustomToast/CustomToast";
+import { FAQItem } from "../../interface/FAQItem";
+import { commissionWork } from "../../interface/commissionWork";
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+
 
 interface OrdersProps {}
 
 const Orders: FC<OrdersProps> = () => {
-  const [myWorks, setMyWorks] = useState<myWork[]>([]);
+  const [commissions, setCommissions] = useState<commissionWork[]>([]);
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [showToast, setShowToast] = useState({
@@ -32,7 +31,7 @@ const Orders: FC<OrdersProps> = () => {
     type: "success" as "success" | "error",
   });
   const [orderType, setOrderType] = useState("");
-  const [formData, setFormData] = useState<OrderFormData>({
+  const [formData, setFormData] = useState<OrderFormDataField>({
     artworkType: "",
     communication: "",
     contactNumber: "",
@@ -52,14 +51,15 @@ const Orders: FC<OrdersProps> = () => {
 
   useEffect(() => {
     document.title = "Orders | The Arts Diary";
-    const fetchMyWorks = async () => {
-      const querySnapshot = await getDocs(collection(db, "myWorks"));
-      const worksData: myWork[] = [];
+
+    const fetchCommissionWorks = async () => {
+      const querySnapshot = await getDocs(collection(db, "commissionWorks"));
+      const commissionsData: commissionWork[] = [];
       querySnapshot.forEach((doc) => {
-        worksData.push(doc.data() as myWork);
+        commissionsData.push(doc.data() as commissionWork);
       });
-      worksData.sort((a, b) => b.year - a.year);
-      setMyWorks(worksData);
+      commissionsData.sort((a, b) => b.year - a.year);
+      setCommissions(commissionsData);
     };
 
     const fetchFAQs = async () => {
@@ -71,7 +71,7 @@ const Orders: FC<OrdersProps> = () => {
       setFaqs(faqsData);
     };
 
-    fetchMyWorks();
+    fetchCommissionWorks();
     fetchFAQs();
   }, []);
 
@@ -120,6 +120,7 @@ const Orders: FC<OrdersProps> = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     centerMode: true,
+    centerPadding: '50px',
     responsive: [
       {
         breakpoint: 480,
@@ -160,7 +161,7 @@ const Orders: FC<OrdersProps> = () => {
     ],
   };
 
-  function validateFormData(data: OrderFormData): boolean {
+  function validateFormData(data: OrderFormDataField): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation regex
 
     if (!data.artworkType) {
@@ -362,7 +363,7 @@ const Orders: FC<OrdersProps> = () => {
         </div>
 
         <Slider {...settings}>
-          {myWorks.map((item, index) => (
+          {commissions.map((item, index) => (
             <div className="slider-item" key={index}>
               <img
                 className="slider-image"
@@ -370,12 +371,13 @@ const Orders: FC<OrdersProps> = () => {
                 alt={item.title}
               />
               <div className="slider-text">
-                <h3 className="slider-title">{item.title}</h3>
+                {/* <h3 className="slider-title">{item.title}</h3> */}
                 <div className="tags">
                   <Badge bg="secondary" className="mr-1">
-                    Category: {item?.category}
+                    {item?.category}
                   </Badge>
-                  <Badge bg="secondary">Size: {item?.size}</Badge>
+                  <Badge bg="secondary">{item?.size} size</Badge>
+                  <Badge bg="secondary">{item?.country}</Badge>
                 </div>
               </div>
             </div>

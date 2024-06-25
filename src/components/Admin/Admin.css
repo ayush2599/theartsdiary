@@ -2,6 +2,7 @@
 .admin-container{
     background-color: var(--light-background-color);
     padding: 20px;
+    color: var(--permanent-dark-color) !important;
 }
 
 .admin{
@@ -26,6 +27,7 @@
   padding-right: 20px !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+  color: var(--permanent-dark-color) !important;
 }
 
 .custom-table {

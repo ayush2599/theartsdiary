@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import "./Home.css";
 import { Button } from "react-bootstrap";
-import { myWork, testimonial } from "../../interface/myWork";
+import { myWork } from "../../interface/myWork";
 //import Masonry, {ResponsiveMasonry  } from "react-responsive-masonry";
 import Masonry from "react-layout-masonry";
 import { db } from "../../firebase";
@@ -10,6 +10,8 @@ import Card from "react-bootstrap/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { testimonial } from "../../interface/testimonial";
+import { Link } from "react-router-dom";
 
 interface HomeProps {}
 
@@ -110,7 +112,6 @@ const Home: FC<HomeProps> = () => {
     return 3;
   };
 
-
   return (
     <div className="Home">
       <div className="header-image-container">
@@ -121,8 +122,12 @@ const Home: FC<HomeProps> = () => {
             Weaving Dreams into Artistic Realities
           </h1>
           <div className="cta-buttons">
-            <Button className="btn-place-order me-2">Place an order</Button>
-            <Button className="btn-read-story">Read my story</Button>
+            <Link to="/orders">
+              <Button className="btn-place-order me-2">Place an order</Button>
+            </Link>
+            <Link to="/about">
+              <Button className="btn-read-story">Read my story</Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -131,7 +136,10 @@ const Home: FC<HomeProps> = () => {
           <p>Featured Artworks</p>
         </div>
         <div className="container">
-          <Masonry columns={{ 400: 1, 768: 2, 1024: getColumnCount(myWorks.length) }} gap={gapSize}>
+          <Masonry
+            columns={{ 400: 1, 768: 2, 1024: getColumnCount(myWorks.length) }}
+            gap={gapSize}
+          >
             {myWorks.map((work) => (
               <div key={work.title}>
                 <Card className="custom-card">
@@ -147,9 +155,11 @@ const Home: FC<HomeProps> = () => {
             ))}
           </Masonry>
           <div className="container-buttons mt-4 mb-4">
-            <Button variant="primary" className="btn-container-action me-2">
-              See more works
-            </Button>
+            <Link to="/works">
+              <Button variant="primary" className="btn-container-action me-2">
+                See more works
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -193,12 +203,14 @@ const Home: FC<HomeProps> = () => {
           </p>
         </div>
         <div className="container-buttons mt-2 mb-4">
+        <Link to="/contact">
           <Button
             variant="primary"
             className="btn-container-action-inverted me-2"
           >
             Reach out
           </Button>
+          </Link>
         </div>
       </div>
 
@@ -219,7 +231,11 @@ const Home: FC<HomeProps> = () => {
                 <li>Custom-designed artworks for unique home decor</li>
                 <li>Perfect for gifts, commemorating special occasions</li>
               </ul>
-              <Button variant="primary" className="service-button">Commission Your Vision</Button>
+              <Link to="/orders">
+              <Button variant="primary" className="service-button">
+                Commission Your Vision
+              </Button>
+              </Link>
             </div>
           </div>
 
@@ -238,7 +254,11 @@ const Home: FC<HomeProps> = () => {
                 </li>
                 <li>Durable, high-quality materials for lasting impact</li>
               </ul>
-              <Button variant="primary" className="service-button">Envision Bigger</Button>
+              <Link to="/orders">
+              <Button variant="primary" className="service-button">
+                Envision Bigger
+              </Button>
+              </Link>
             </div>
           </div>
 
@@ -261,7 +281,11 @@ const Home: FC<HomeProps> = () => {
                 </li>
                 <li>Quick turnaround to meet business timelines</li>
               </ul>
-              <Button variant="primary" className="service-button">Digitalize Your Vision</Button>
+              <Link to="/orders">
+              <Button variant="primary" className="service-button">
+                Digitalize Your Vision
+              </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -283,10 +307,7 @@ const Home: FC<HomeProps> = () => {
                   </span>
                 </div>
                 <div className="testimonial-image">
-                  <img
-                    src="/assets/happy_customer.jpeg"
-                    alt="Client or Artwork"
-                  />
+                  <img src={testimonial.imageLink} alt="Client or Artwork" />
                 </div>
               </div>
             ))}

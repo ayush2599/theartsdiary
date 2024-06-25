@@ -1,36 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+@import url("/src/styles/color_variable.css");
 
 @font-face {
-  font-family: 'Syne-Medium'; /* Give the font a name */
-  src: url('../public/assets/Syne-Medium.ttf') format('truetype');
+  font-family: "Syne-Medium"; /* Give the font a name */
+  src: url("../public/assets/Syne-Medium.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Syne-Bold'; /* Give the font a name */
-  src: url('../public/assets/Syne-Bold.ttf') format('truetype');
+  font-family: "Syne-Bold"; /* Give the font a name */
+  src: url("../public/assets/Syne-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Syne-Regular'; /* Give the font a name */
-  src: url('../public/assets/Syne-Regular.ttf') format('truetype');
+  font-family: "Syne-Regular"; /* Give the font a name */
+  src: url("../public/assets/Syne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Syne-SemiBold'; /* Give the font a name */
-  src: url('../public/assets/Syne-SemiBold.ttf') format('truetype');
+  font-family: "Syne-SemiBold"; /* Give the font a name */
+  src: url("../public/assets/Syne-SemiBold.ttf") format("truetype");
 }
-
 
 html {
   color-scheme: light dark;
 }
 
-body{
-  font-family:  'Syne-Regular',sans-serif;
+body {
+  font-family: "Syne-Regular", sans-serif;
+  background: var(--light-background-color) !important;
   background-color: var(--light-background-color) !important;
 }
-.content-container{
+.content-container {
   margin-left: 0px;
   margin-top: 80px !important;
   margin-right: 0px;
@@ -53,7 +53,7 @@ body{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
   z-index: 1000; /* Ensures it's above other content */
   opacity: 0.3;
-  transition: opacity 0.3s ease, background-color 0.3s ease; 
+  transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
 .theme-switcher:focus {
@@ -82,7 +82,8 @@ body{
   letter-spacing: 1.2px;
 }
 
-.container-buttons .btn-container-action, .btn-container-action {
+.container-buttons .btn-container-action,
+.btn-container-action {
   background-color: var(--permanent-dark-color); /* Grey close to white */
   border: 2px solid var(--permanent-dark-color); /* Remove default border */
   color: var(--permanent-white-color); /* Darker text color for contrast */
@@ -118,7 +119,9 @@ body{
 .container-buttons .btn-container-action:hover,
 .container-buttons .btn-container-action:focus,
 .container-buttons .btn-container-action:active {
-  background-color: var(--permanent-white-color) !important; /* Slightly darker on hover for visual feedback */
+  background-color: var(
+    --permanent-white-color
+  ) !important; /* Slightly darker on hover for visual feedback */
   color: var(--permanent-dark-color) !important;
   border: 2px solid var(--permanent-dark-color) !important; /* Remove default border */
   box-shadow: none !important;
@@ -129,7 +132,9 @@ body{
 .container-buttons .btn-container-action-inverted:active {
   background-color: #fff !important; /* Grey close to white */
   border: 2px solid #fff !important; /* Remove default border */
-  color: var(--permanent-dark-color) !important; /* Darker text color for contrast */
+  color: var(
+    --permanent-dark-color
+  ) !important; /* Darker text color for contrast */
   box-shadow: none !important;
 }
 

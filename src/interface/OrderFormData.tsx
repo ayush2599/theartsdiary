@@ -1,4 +1,4 @@
-export interface OrderFormData {
+export interface OrderFormDataField {
     artworkType: string;
     communication: string;
     contactNumber: string;
@@ -10,3 +10,7 @@ export interface OrderFormData {
     name: string;
     referenceImages: string[];
   }
+
+export interface OrderFormData extends OrderFormDataField{
+  id: string | null; // This is the Firebase document ID
+}

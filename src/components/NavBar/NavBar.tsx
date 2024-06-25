@@ -55,7 +55,7 @@ const NavBar: FC<NavBarProps> = () => {
             <Link to="/orders" className='nav-link' role='button' onClick={toggleNavbar}>ORDERS</Link>
           
           
-            <Link to="/blogs" className='nav-link' role='button' onClick={toggleNavbar}>BLOGS</Link>
+            {/* <Link to="/blogs" className='nav-link' role='button' onClick={toggleNavbar}>BLOGS</Link> */}
           
           
             <Link to="/about" className='nav-link' role='button' onClick={toggleNavbar}>ABOUT</Link>

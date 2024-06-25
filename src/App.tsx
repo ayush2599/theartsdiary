@@ -17,6 +17,10 @@ import { ThemeProvider } from "./ThemeContext";
 import { useTheme } from "./ThemeContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import NewFaq from "./components/NewFaq/NewFaq";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
+import NewTestimonial from "./components/NewTestimonial/NewTestimonial";
+import NewComissionWork from "./components/NewComissionWork/NewComissionWork";
 
 function App() {
 
@@ -36,6 +40,13 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/newwork" element={<NewWork />} />
               <Route path="/admin/newwork/:id" element={<NewWork />} />
+              <Route path="/admin/newcomissionwork" element={<NewComissionWork />} />
+              <Route path="/admin/newcomissionwork/:id" element={<NewComissionWork />} />
+              <Route path="/admin/newtestimonial" element={<NewTestimonial />} />
+              <Route path="/admin/newtestimonial/:id" element={<NewTestimonial />} />
+              <Route path="/admin/newfaq" element={<NewFaq />} />
+              <Route path="/admin/newfaq/:id" element={<NewFaq />} />
+              <Route path="/admin/orderdetails/:id" element={<OrderDetails />} />
             </Routes>
             <div className="footer-container">
               <Footer />
