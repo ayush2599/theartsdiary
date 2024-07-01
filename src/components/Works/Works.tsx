@@ -20,7 +20,7 @@ const Works: FC<WorksProps> = () => {
   const [selectedWork, setSelectedWork] = useState<myWork | null>(null); // State for selected card data
 
   useEffect(() => {
-    document.title = "Works | The Arts Diary"; 
+    document.title = "Works | The Arts Diary";
     const fetchMyWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];
@@ -43,17 +43,33 @@ const Works: FC<WorksProps> = () => {
 
   function addLineBreaks(description: any) {
     if (description) {
-      // Define a regular expression to match the characters or tags where you want to add line breaks.
+      // Define a regular expression to match <br> tags.
       const lineBreakRegex = /<br\s*\/?>/i;
-  
+
       // Use the regex to split the description into an array of parts.
       const parts: string[] = description.split(lineBreakRegex);
-  
-      // Map over the parts and wrap them in <p> tags.
+
+      // Function to handle nested HTML tags, specifically <b> and </b>
+      const parseHtml = (text: string) => {
+        const htmlRegex = /(<\/?b>)/i;
+        const htmlParts = text.split(htmlRegex).filter((part) => part !== "");
+
+        return htmlParts.map((part, index) => {
+          if (part.match(/<b>/i)) {
+            return <b key={`b-open-${index}`}>{/* Opening <b> tag */}</b>;
+          } else if (part.match(/<\/b>/i)) {
+            return <b key={`b-close-${index}`}>{/* Closing <b> tag */}</b>;
+          } else {
+            return part;
+          }
+        });
+      };
+
+      // Map over the parts and wrap them in <p> tags, handling nested <b> tags.
       const descriptionWithBreaks = parts.map((part, index) => (
-        <p key={index}>{part}</p>
+        <p key={index}>{parseHtml(part)}</p>
       ));
-  
+
       return descriptionWithBreaks;
     } else {
       // Handle the case where description is undefined or empty.
@@ -65,7 +81,10 @@ const Works: FC<WorksProps> = () => {
     <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={20} className="works">
       {myWorks.map((work) => (
         <div key={work.title}>
-          <Card className="work-custom-card" onClick={() => handleCardClick(work)}>
+          <Card
+            className="work-custom-card"
+            onClick={() => handleCardClick(work)}
+          >
             <div className="work-card-image">
               <Card.Img variant="top" src={work.imageLink} alt={work.title} />
               <div className="work-image-overlay">
@@ -105,18 +124,23 @@ const Works: FC<WorksProps> = () => {
                   <Badge bg="secondary" className="mr-1">
                     Category: {selectedWork?.category}
                   </Badge>
-                  <Badge bg="secondary">Size: {selectedWork?.size}</Badge>
+                  {selectedWork?.size && selectedWork?.size.length > 0 && (
+                    <Badge bg="secondary">Size: {selectedWork?.size}</Badge>
+                  )}
                 </div>
-                <div className="workDetails-instaLink">
-                  <a
-                    href={selectedWork?.instaPostLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-instagram"></i>
-                    View on Instagram
-                  </a>
-                </div>
+                {selectedWork?.instaPostLink &&
+                  selectedWork?.instaPostLink.length > 0 && (
+                    <div className="workDetails-instaLink">
+                      <a
+                        href={selectedWork?.instaPostLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fa fa-instagram"></i>
+                        View on Instagram
+                      </a>
+                    </div>
+                  )}
               </div>
             </Col>
           </Row>

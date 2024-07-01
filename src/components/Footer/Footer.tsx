@@ -60,10 +60,10 @@ const Footer: FC<FooterProps> = () => (
 
       <div className="footer-right">
         <div className="footer-follow">
-          <a href="https://instagram.com" className="social-icon">
+          <a href="https://instagram.com/theartsdiary" className="social-icon">
           <FontAwesomeIcon icon={faInstagram}/>
           </a>
-          <a href="https://facebook.com" className="social-icon">
+          <a href="https://facebook.com/theartsdiary" className="social-icon">
           <FontAwesomeIcon icon={faFacebookF} />
           </a>
           <a href="https://tiktok.com" className="social-icon">

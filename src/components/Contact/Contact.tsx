@@ -118,21 +118,21 @@ const Contact: FC<ContactProps> = () => {
           </div>
           <div className="social-media-icons">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/theartsdiary"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://facebook.com/theartsdiary"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://wa.me/+918300875021"
               target="_blank"
               rel="noopener noreferrer"
             >

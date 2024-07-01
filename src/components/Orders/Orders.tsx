@@ -17,8 +17,6 @@ import CustomToast from "../CustomToast/CustomToast";
 import { FAQItem } from "../../interface/FAQItem";
 import { commissionWork } from "../../interface/commissionWork";
 
-
-
 interface OrdersProps {}
 
 const Orders: FC<OrdersProps> = () => {
@@ -120,7 +118,7 @@ const Orders: FC<OrdersProps> = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     centerMode: true,
-    centerPadding: '50px',
+    centerPadding: "50px",
     responsive: [
       {
         breakpoint: 480,
@@ -376,8 +374,12 @@ const Orders: FC<OrdersProps> = () => {
                   <Badge bg="secondary" className="mr-1">
                     {item?.category}
                   </Badge>
-                  <Badge bg="secondary">{item?.size} size</Badge>
-                  <Badge bg="secondary">{item?.country}</Badge>
+                  {item.size && item.size.length > 0 && (
+                    <Badge bg="secondary">{item.size} size</Badge>
+                  )}
+                  {item.country && item.country.length > 0 && (
+                    <Badge bg="secondary">{item?.country}</Badge>
+                  )}
                 </div>
               </div>
             </div>
