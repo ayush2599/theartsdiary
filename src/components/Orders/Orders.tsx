@@ -49,6 +49,7 @@ const Orders: FC<OrdersProps> = () => {
 
   useEffect(() => {
     document.title = "Orders | The Arts Diary";
+    window.scrollTo(0, 0);
 
     const fetchCommissionWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "commissionWorks"));

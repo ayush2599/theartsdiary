@@ -1,9 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "./About.css";
 
 interface AboutProps {}
 
-const About: FC<AboutProps> = () => (
+const About: FC<AboutProps> = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return(
   <div className="about padded-container">
     <div className="container-title">
       <p>Behind the Canvas</p>
@@ -83,5 +88,6 @@ const About: FC<AboutProps> = () => (
     </div>
   </div>
 );
+};
 
 export default About;

@@ -1,9 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import './TermsOfService.css';
 
 interface TermsOfServiceProps {}
 
-const TermsOfService: FC<TermsOfServiceProps> = () => (
+const TermsOfService: FC<TermsOfServiceProps> = () => {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return (
   <div className="TermsOfService">
     <div className="container-title pt-5">
           <p>Terms of Service</p>
@@ -19,5 +25,6 @@ const TermsOfService: FC<TermsOfServiceProps> = () => (
     </div>
   </div>
 );
+};
 
 export default TermsOfService;

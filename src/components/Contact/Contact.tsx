@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./Contact.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,6 +29,10 @@ const Contact: FC<ContactProps> = () => {
     type: "success" as "success" | "error",
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

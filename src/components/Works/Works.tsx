@@ -21,6 +21,8 @@ const Works: FC<WorksProps> = () => {
 
   useEffect(() => {
     document.title = "Works | The Arts Diary";
+    window.scrollTo(0, 0);
+    
     const fetchMyWorks = async () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];
