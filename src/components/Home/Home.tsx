@@ -116,7 +116,7 @@ const Home: FC<HomeProps> = () => {
   return (
     <div className="Home">
       <div className="header-image-container">
-        <img src="assets/header.jpg" alt="Header" className="header-image" />
+        <img src="assets/header.webp" alt="Header" className="header-image" />
         <div className="header-image-overlay"></div>
         <div className="header-content">
           <h1 className="header-title">
