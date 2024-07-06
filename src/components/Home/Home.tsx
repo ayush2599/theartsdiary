@@ -39,6 +39,7 @@ const Home: FC<HomeProps> = () => {
 
   useEffect(() => {
     document.title = "The Arts Diary";
+    window.scrollTo(0, 0);
     const fetchMyWorks = async () => {
       const q = query(
         collection(db, "myWorks"),
