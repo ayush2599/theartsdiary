@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF, faTiktok, faBehance } from '@fortawesome/free-brands-svg-icons';
+import { Link } from "react-router-dom";
 
 
 interface FooterProps {}
@@ -76,17 +77,17 @@ const Footer: FC<FooterProps> = () => (
         <div className="footer-quicklink">
           <ul className="footer-nav">
             <li className="footer-nav-item">
-              <a href="#" className="footer-nav-link">
+            <Link to="/termsofservice" className='footer-nav-link'>
                 Terms of Service
-              </a>
+            </Link>
             </li>
             <li className="footer-nav-item">
-              <a href="#" className="footer-nav-link">
+            <Link to="/privacypolicy" className='footer-nav-link'>
                 Privacy Policy
-              </a>
+            </Link>
             </li>
             <li className="footer-nav-item">
-              <a href="#" className="footer-nav-link">
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="footer-nav-link">
                 Sitemap
               </a>
             </li>

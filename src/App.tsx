@@ -21,6 +21,9 @@ import NewFaq from "./components/NewFaq/NewFaq";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import NewTestimonial from "./components/NewTestimonial/NewTestimonial";
 import NewComissionWork from "./components/NewComissionWork/NewComissionWork";
+import TermsOfService from "./components/TermsOfService/TermsOfService";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
 
@@ -48,6 +51,10 @@ function App() {
               <Route path="/admin/newfaq" element={<NewFaq />} />
               <Route path="/admin/newfaq/:id" element={<NewFaq />} />
               <Route path="/admin/orderdetails/:id" element={<OrderDetails />} />
+              <Route path="/termsofservice" element={<TermsOfService />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<NotFound />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
             <div className="footer-container">
               <Footer />
