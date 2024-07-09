@@ -42,7 +42,8 @@ const Orders: FC<OrdersProps> = () => {
     referenceImages: [],
   });
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
@@ -353,6 +354,10 @@ const Orders: FC<OrdersProps> = () => {
       });
     }
   };
+
+  const filteredCountryCodes = country_codes.country_code.filter((code) =>
+    code.code.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="Orders padded-container">

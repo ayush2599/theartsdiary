@@ -27,7 +27,6 @@ const Works: FC<WorksProps> = () => {
       const querySnapshot = await getDocs(collection(db, "myWorks"));
       const worksData: myWork[] = [];
       querySnapshot.forEach((doc) => {
-        console.log("Pushed: " + doc.data().title);
         worksData.push(doc.data() as myWork);
       });
       worksData.sort((a, b) => b.year - a.year);
