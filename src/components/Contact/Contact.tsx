@@ -104,12 +104,12 @@ const Contact: FC<ContactProps> = () => {
         <meta name="keywords" content="contact, get in touch, art diary" />
         <meta property="og:title" content="The Arts Diary | Contact" />
         <meta property="og:description" content="Get in touch with The Arts Diary." />
-        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/contact" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="The Arts Diary | Contact Us" />
         <meta name="twitter:description" content="Get in touch with us at The Arts Diary. We're here to help you with any questions or concerns." />
-        <meta name="twitter:image" content="URL_TO_YOUR_SMALL_IMAGE" />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
       </Helmet>
       <div className="container-title">
         <p>Contact Us</p>

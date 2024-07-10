@@ -18,12 +18,12 @@ const TermsOfService: FC<TermsOfServiceProps> = () => {
         <meta name="keywords" content="terms of service, policies, legal" />
         <meta property="og:title" content="The Arts Diary | Terms of Service" />
         <meta property="og:description" content="Read our terms of service." />
-        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/termsofservice" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="The Arts Diary | Terms of Service" />
         <meta name="twitter:description" content="Read our terms of service." />
-        <meta name="twitter:image" content="URL_TO_YOUR_SMALL_IMAGE" />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
       </Helmet>
     <div className="container-title pt-5">
           <p>Terms of Service</p>

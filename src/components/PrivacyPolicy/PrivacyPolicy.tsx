@@ -17,12 +17,12 @@ const PrivacyPolicy: FC<PrivacyPolicyProps> = () => {
         <meta name="keywords" content="privacy policy, data protection, legal" />
         <meta property="og:title" content="The Arts Diary | Privacy Policy" />
         <meta property="og:description" content="Read our privacy policy." />
-        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/privacypolicy" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="The Arts Diary | Privacy Policy" />
         <meta name="twitter:description" content="Read our privacy policy." />
-        <meta name="twitter:image" content="URL_TO_YOUR_SMALL_IMAGE" />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
       </Helmet>
       <div className="container-title pt-5">
         <p>Privacy Policy</p>
