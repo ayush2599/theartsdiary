@@ -15,8 +15,8 @@ import Works from "./components/Works/Works";
 import NewWork from "./components/NewWork/NewWork";
 import { ThemeProvider } from "./ThemeContext";
 import { useTheme } from "./ThemeContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import NewFaq from "./components/NewFaq/NewFaq";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import NewTestimonial from "./components/NewTestimonial/NewTestimonial";
@@ -24,46 +24,63 @@ import NewComissionWork from "./components/NewComissionWork/NewComissionWork";
 import TermsOfService from "./components/TermsOfService/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import NotFound from "./components/NotFound/NotFound";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
-
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="App">
-          <NavBar />
-          <div className="content-container">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/works" element={<Works />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/newwork" element={<NewWork />} />
-              <Route path="/admin/newwork/:id" element={<NewWork />} />
-              <Route path="/admin/newcomissionwork" element={<NewComissionWork />} />
-              <Route path="/admin/newcomissionwork/:id" element={<NewComissionWork />} />
-              <Route path="/admin/newtestimonial" element={<NewTestimonial />} />
-              <Route path="/admin/newtestimonial/:id" element={<NewTestimonial />} />
-              <Route path="/admin/newfaq" element={<NewFaq />} />
-              <Route path="/admin/newfaq/:id" element={<NewFaq />} />
-              <Route path="/admin/orderdetails/:id" element={<OrderDetails />} />
-              <Route path="/termsofservice" element={<TermsOfService />} />
-              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-            <div className="footer-container">
-              <Footer />
-              <ThemeSwitcher />
+    <HelmetProvider>
+      <ThemeProvider>
+        <Router>
+          <div className="App">
+            <NavBar />
+            <div className="content-container">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/works" element={<Works />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/blogs" element={<Blogs />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/newwork" element={<NewWork />} />
+                <Route path="/admin/newwork/:id" element={<NewWork />} />
+                <Route
+                  path="/admin/newcomissionwork"
+                  element={<NewComissionWork />}
+                />
+                <Route
+                  path="/admin/newcomissionwork/:id"
+                  element={<NewComissionWork />}
+                />
+                <Route
+                  path="/admin/newtestimonial"
+                  element={<NewTestimonial />}
+                />
+                <Route
+                  path="/admin/newtestimonial/:id"
+                  element={<NewTestimonial />}
+                />
+                <Route path="/admin/newfaq" element={<NewFaq />} />
+                <Route path="/admin/newfaq/:id" element={<NewFaq />} />
+                <Route
+                  path="/admin/orderdetails/:id"
+                  element={<OrderDetails />}
+                />
+                <Route path="/termsofservice" element={<TermsOfService />} />
+                <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                <Route path="*" element={<NotFound />} />
+                <Route path="/*" element={<NotFound />} />
+              </Routes>
+              <div className="footer-container">
+                <Footer />
+                <ThemeSwitcher />
+              </div>
             </div>
           </div>
-        </div>
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
@@ -71,7 +88,7 @@ function ThemeSwitcher() {
   const { theme, toggleTheme } = useTheme(); // Correct use of useTheme within context
   return (
     <button className="theme-switcher" onClick={toggleTheme}>
-      <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
+      <FontAwesomeIcon icon={theme === "dark" ? faSun : faMoon} />
     </button>
   );
 }

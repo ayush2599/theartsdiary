@@ -16,6 +16,7 @@ import { OrderFormDataField } from "../../interface/OrderFormData";
 import CustomToast from "../CustomToast/CustomToast";
 import { FAQItem } from "../../interface/FAQItem";
 import { commissionWork } from "../../interface/commissionWork";
+import { Helmet } from "react-helmet-async";
 
 interface OrdersProps {}
 
@@ -361,6 +362,19 @@ const Orders: FC<OrdersProps> = () => {
 
   return (
     <div className="Orders padded-container">
+      <Helmet>
+        <title>The Arts Diary | Orders</title>
+        <meta name="description" content="Place your custom artwork orders here." />
+        <meta name="keywords" content="order art, custom artwork, personalized art" />
+        <meta property="og:title" content="The Arts Diary | Orders" />
+        <meta property="og:description" content="Place your custom artwork orders here." />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/orders" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Arts Diary | Orders" />
+        <meta name="twitter:description" content="Place your custom artwork orders here." />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg" />
+      </Helmet>
       <div className="recent-works">
         <div className="container-title">
           <p>Recent Comisssions</p>

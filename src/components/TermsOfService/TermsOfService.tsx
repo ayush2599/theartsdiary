@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import './TermsOfService.css';
+import { Helmet } from 'react-helmet-async';
 
 interface TermsOfServiceProps {}
 
@@ -11,6 +12,19 @@ const TermsOfService: FC<TermsOfServiceProps> = () => {
   
   return (
   <div className="TermsOfService">
+    <Helmet>
+        <title>The Arts Diary | Terms of Service</title>
+        <meta name="description" content="Read our terms of service." />
+        <meta name="keywords" content="terms of service, policies, legal" />
+        <meta property="og:title" content="The Arts Diary | Terms of Service" />
+        <meta property="og:description" content="Read our terms of service." />
+        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/termsofservice" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="The Arts Diary | Terms of Service" />
+        <meta name="twitter:description" content="Read our terms of service." />
+        <meta name="twitter:image" content="URL_TO_YOUR_SMALL_IMAGE" />
+      </Helmet>
     <div className="container-title pt-5">
           <p>Terms of Service</p>
         </div>

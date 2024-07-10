@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { testimonial } from "../../interface/testimonial";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 interface HomeProps {}
 
@@ -115,6 +116,19 @@ const Home: FC<HomeProps> = () => {
 
   return (
     <div className="Home">
+      <Helmet>
+        <title>The Arts Diary | Home</title>
+        <meta name="description" content="Welcome to The Arts Diary. Explore our collection of artworks and learn about our services." />
+        <meta name="keywords" content="art, diary, artworks, services, custom art, paintings" />
+        <meta property="og:title" content="The Arts Diary | Home" />
+        <meta property="og:description" content="Welcome to The Arts Diary. Explore our collection of artworks and learn about our services." />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_home.jpg" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Arts Diary | Home" />
+        <meta name="twitter:description" content="Welcome to The Arts Diary. Explore our collection of artworks and learn about our services." />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_home.jpg" />
+      </Helmet>
       <div className="header-image-container">
         <img src="assets/header.webp" alt="Header" className="header-image" />
         <div className="header-image-overlay"></div>
@@ -204,13 +218,13 @@ const Home: FC<HomeProps> = () => {
           </p>
         </div>
         <div className="container-buttons mt-2 mb-4">
-        <Link to="/contact">
-          <Button
-            variant="primary"
-            className="btn-container-action-inverted me-2"
-          >
-            Reach out
-          </Button>
+          <Link to="/contact">
+            <Button
+              variant="primary"
+              className="btn-container-action-inverted me-2"
+            >
+              Reach out
+            </Button>
           </Link>
         </div>
       </div>
@@ -233,9 +247,9 @@ const Home: FC<HomeProps> = () => {
                 <li>Perfect for gifts, commemorating special occasions</li>
               </ul>
               <Link to="/orders">
-              <Button variant="primary" className="service-button">
-                Commission Your Vision
-              </Button>
+                <Button variant="primary" className="service-button">
+                  Commission Your Vision
+                </Button>
               </Link>
             </div>
           </div>
@@ -256,9 +270,9 @@ const Home: FC<HomeProps> = () => {
                 <li>Durable, high-quality materials for lasting impact</li>
               </ul>
               <Link to="/orders">
-              <Button variant="primary" className="service-button">
-                Envision Bigger
-              </Button>
+                <Button variant="primary" className="service-button">
+                  Envision Bigger
+                </Button>
               </Link>
             </div>
           </div>
@@ -283,9 +297,9 @@ const Home: FC<HomeProps> = () => {
                 <li>Quick turnaround to meet business timelines</li>
               </ul>
               <Link to="/orders">
-              <Button variant="primary" className="service-button">
-                Digitalize Your Vision
-              </Button>
+                <Button variant="primary" className="service-button">
+                  Digitalize Your Vision
+                </Button>
               </Link>
             </div>
           </div>

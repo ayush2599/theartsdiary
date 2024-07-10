@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
 import "./About.css";
+import { Helmet } from "react-helmet-async";
 
 interface AboutProps {}
 
@@ -10,6 +11,19 @@ const About: FC<AboutProps> = () => {
 
   return(
   <div className="about padded-container">
+    <Helmet>
+        <title>The Arts Diary | About</title>
+        <meta name="description" content="Learn more about The Arts Diary and our mission." />
+        <meta name="keywords" content="about us, mission, art diary" />
+        <meta property="og:title" content="The Arts Diary | About" />
+        <meta property="og:description" content="Learn more about The Arts Diary and our mission." />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_about.jpg" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/about" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Arts Diary | About" />
+        <meta name="twitter:description" content="Learn more about The Arts Diary and our mission." />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_about.jpg" />
+      </Helmet>
     <div className="container-title">
       <p>Behind the Canvas</p>
     </div>

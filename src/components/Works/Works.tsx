@@ -11,6 +11,7 @@ import { myWork } from "../../interface/myWork";
 //import Masonry, {ResponsiveMasonry  } from "react-responsive-masonry";
 import Masonry from "react-layout-masonry";
 import { Badge } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
 
 interface WorksProps {}
 
@@ -80,6 +81,19 @@ const Works: FC<WorksProps> = () => {
 
   return (
     <Masonry columns={{ 400: 2, 768: 2, 1024: 3 }} gap={20} className="works">
+      <Helmet>
+        <title>The Arts Diary | Works</title>
+        <meta name="description" content="Explore our diverse collection of artworks." />
+        <meta name="keywords" content="art, gallery, paintings, sculptures, custom art" />
+        <meta property="og:title" content="The Arts Diary | Works" />
+        <meta property="og:description" content="Explore our diverse collection of artworks." />
+        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_works.jpg" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/works" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Arts Diary | Works" />
+        <meta name="twitter:description" content="Explore our diverse collection of artworks." />
+        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_works.jpg" />
+      </Helmet>
       {myWorks.map((work) => (
         <div key={work.title}>
           <Card
@@ -95,6 +109,7 @@ const Works: FC<WorksProps> = () => {
           </Card>
         </div>
       ))}
+      
 
       {/* Modal to display card details */}
       <Modal

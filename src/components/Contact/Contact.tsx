@@ -13,6 +13,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import emailjs from "emailjs-com";
 import CustomToast from "../CustomToast/CustomToast";
+import { Helmet } from "react-helmet-async";
 
 interface ContactProps {}
 
@@ -97,6 +98,19 @@ const Contact: FC<ContactProps> = () => {
 
   return (
     <div className="contact padded-container">
+      <Helmet>
+        <title>The Arts Diary | Contact</title>
+        <meta name="description" content="Get in touch with The Arts Diary." />
+        <meta name="keywords" content="contact, get in touch, art diary" />
+        <meta property="og:title" content="The Arts Diary | Contact" />
+        <meta property="og:description" content="Get in touch with The Arts Diary." />
+        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/contact" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="The Arts Diary | Contact Us" />
+        <meta name="twitter:description" content="Get in touch with us at The Arts Diary. We're here to help you with any questions or concerns." />
+        <meta name="twitter:image" content="URL_TO_YOUR_SMALL_IMAGE" />
+      </Helmet>
       <div className="container-title">
         <p>Contact Us</p>
       </div>
