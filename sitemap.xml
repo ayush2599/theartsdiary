@@ -9,7 +9,7 @@
   </url>
 
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/home</loc>
+    <loc>https://theartsdiary.ayushkarn.in/home</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -17,7 +17,7 @@
 
   <!-- Works Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/works</loc>
+    <loc>https://theartsdiary.ayushkarn.in/works</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -25,7 +25,7 @@
 
   <!-- Orders Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/orders</loc>
+    <loc>https://theartsdiary.ayushkarn.in/orders</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -33,7 +33,7 @@
 
   <!-- About Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/about</loc>
+    <loc>https://theartsdiary.ayushkarn.in/about</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -41,7 +41,7 @@
 
   <!-- Contact Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/contact</loc>
+    <loc>https://theartsdiary.ayushkarn.in/contact</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -49,7 +49,7 @@
 
   <!-- Terms of Service Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/termsofservice</loc>
+    <loc>https://theartsdiary.ayushkarn.in/termsofservice</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -57,7 +57,7 @@
 
   <!-- Privacy Policy Page -->
   <url>
-    <loc>https://theartsdiary.ayushkarn.in/#/privacypolicy</loc>
+    <loc>https://theartsdiary.ayushkarn.in/privacypolicy</loc>
     <lastmod>2024-07-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
