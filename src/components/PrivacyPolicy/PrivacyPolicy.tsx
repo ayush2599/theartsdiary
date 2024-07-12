@@ -12,16 +12,16 @@ const PrivacyPolicy: FC<PrivacyPolicyProps> = () => {
   return (
     <div className="PrivacyPolicy">
       <Helmet>
-        <title>The Arts Diary | Privacy Policy</title>
-        <meta name="description" content="Read our privacy policy." />
-        <meta name="keywords" content="privacy policy, data protection, legal" />
-        <meta property="og:title" content="The Arts Diary | Privacy Policy" />
-        <meta property="og:description" content="Read our privacy policy." />
+        <title>The Arts Diary | Privacy Policy - Our Commitment to Your Privacy</title>
+        <meta name="description" content="Our Privacy Policy at The Arts Diary outlines our practices regarding the collection, use, and protection of your personal information. We are committed to safeguarding your privacy and ensuring transparency." />
+        <meta name="keywords" content="privacy policy, personal information protection, privacy practices, data security, information transparency" />
+        <meta property="og:title" content="The Arts Diary | Privacy Policy - Our Commitment to Your Privacy" />
+        <meta property="og:description" content="Our Privacy Policy at The Arts Diary outlines our practices regarding the collection, use, and protection of your personal information. We are committed to safeguarding your privacy and ensuring transparency." />
         <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/privacypolicy" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="The Arts Diary | Privacy Policy" />
-        <meta name="twitter:description" content="Read our privacy policy." />
+        <meta name="twitter:title" content="The Arts Diary | Privacy Policy - Our Commitment to Your Privacy" />
+        <meta name="twitter:description" content="Our Privacy Policy at The Arts Diary outlines our practices regarding the collection, use, and protection of your personal information. We are committed to safeguarding your privacy and ensuring transparency." />
         <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
       </Helmet>
       <div className="container-title pt-5">

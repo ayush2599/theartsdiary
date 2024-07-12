@@ -17,10 +17,13 @@ import CustomToast from "../CustomToast/CustomToast";
 import { FAQItem } from "../../interface/FAQItem";
 import { commissionWork } from "../../interface/commissionWork";
 import { Helmet } from "react-helmet-async";
+import Preloader from "../Preloader/Preloader";
+import Select from "react-select";
 
 interface OrdersProps {}
 
 const Orders: FC<OrdersProps> = () => {
+  const [loading, setLoading] = useState(true);
   const [commissions, setCommissions] = useState<commissionWork[]>([]);
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -43,8 +46,8 @@ const Orders: FC<OrdersProps> = () => {
     referenceImages: [],
   });
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
@@ -54,22 +57,36 @@ const Orders: FC<OrdersProps> = () => {
     window.scrollTo(0, 0);
 
     const fetchCommissionWorks = async () => {
-      const querySnapshot = await getDocs(collection(db, "commissionWorks"));
-      const commissionsData: commissionWork[] = [];
-      querySnapshot.forEach((doc) => {
-        commissionsData.push(doc.data() as commissionWork);
-      });
-      commissionsData.sort((a, b) => b.year - a.year);
-      setCommissions(commissionsData);
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "commissionWorks"));
+        const commissionsData: commissionWork[] = [];
+        querySnapshot.forEach((doc) => {
+          commissionsData.push(doc.data() as commissionWork);
+        });
+        commissionsData.sort((a, b) => b.year - a.year);
+        setCommissions(commissionsData);
+      } catch (error) {
+        console.error("Failed to fetch commission works:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     const fetchFAQs = async () => {
-      const faqsSnapshot = await getDocs(collection(db, "faqs"));
-      const faqsData: FAQItem[] = [];
-      faqsSnapshot.forEach((doc) => {
-        faqsData.push(doc.data() as FAQItem);
-      });
-      setFaqs(faqsData);
+      setLoading(true);
+      try {
+        const faqsSnapshot = await getDocs(collection(db, "faqs"));
+        const faqsData: FAQItem[] = [];
+        faqsSnapshot.forEach((doc) => {
+          faqsData.push(doc.data() as FAQItem);
+        });
+        setFaqs(faqsData);
+      } catch (error) {
+        console.error("Failed to fetch FAQs:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchCommissionWorks();
@@ -360,365 +377,412 @@ const Orders: FC<OrdersProps> = () => {
     code.code.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const countryCodeOptions = country_codes.country_code.map((code) => ({
+    value: code.dial_code,
+    label: `${code.code} (${code.dial_code})`,
+  }));
+
+  const handleCountryCodeChange = (selectedOption: any) => {
+    setFormData({
+      ...formData,
+      countryCode: selectedOption.value,
+    });
+  };
+
   return (
-    <div className="Orders padded-container">
-      <Helmet>
-        <title>The Arts Diary | Orders</title>
-        <meta name="description" content="Place your custom artwork orders here." />
-        <meta name="keywords" content="order art, custom artwork, personalized art" />
-        <meta property="og:title" content="The Arts Diary | Orders" />
-        <meta property="og:description" content="Place your custom artwork orders here." />
-        <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg" />
-        <meta property="og:url" content="https://theartsdiary.ayushkarn.in/orders" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Arts Diary | Orders" />
-        <meta name="twitter:description" content="Place your custom artwork orders here." />
-        <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg" />
-      </Helmet>
-      <div className="recent-works">
-        <div className="container-title">
-          <p>Recent Comisssions</p>
-        </div>
+    <div>
+      {loading ? (
+        <Preloader />
+      ) : (
+        <div className="Orders padded-container">
+          <Helmet>
+            <title>The Arts Diary | Custom Orders - Get Personalized Artworks Crafted to Your Preference</title>
+            <meta
+              name="description"
+              content="Order personalized artworks tailored to your preferences at The Arts Diary. Whether it's a portrait, a landscape, or a unique piece for a special occasion, we bring your ideas to life with exquisite craftsmanship and attention to detail."
+            />
+            <meta
+              name="keywords"
+              content="custom artwork, personalized portraits, art commission, bespoke art services, order custom art, portrait artist, custom gifts"
+            />
+            <meta property="og:title" content="The Arts Diary | Custom Orders - Get Personalized Artworks Crafted to Your Preference" />
+            <meta
+              property="og:description"
+              content="Order personalized artworks tailored to your preferences at The Arts Diary. Whether it's a portrait, a landscape, or a unique piece for a special occasion, we bring your ideas to life with exquisite craftsmanship and attention to detail."
+            />
+            <meta
+              property="og:image"
+              content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg"
+            />
+            <meta
+              property="og:url"
+              content="https://theartsdiary.ayushkarn.in/orders"
+            />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="The Arts Diary | Custom Orders - Get Personalized Artworks Crafted to Your Preference" />
+            <meta
+              name="twitter:description"
+              content="Order personalized artworks tailored to your preferences at The Arts Diary. Whether it's a portrait, a landscape, or a unique piece for a special occasion, we bring your ideas to life with exquisite craftsmanship and attention to detail."
+            />
+            <meta
+              name="twitter:image"
+              content="https://theartsdiary.ayushkarn.in/assets/thumb_orders.jpg"
+            />
+          </Helmet>
+          <div className="recent-works">
+            <div className="container-title">
+              <p>Recent Comisssions</p>
+            </div>
 
-        <Slider {...settings}>
-          {commissions.map((item, index) => (
-            <div className="slider-item" key={index}>
-              <img
-                className="slider-image"
-                src={item.imageLink}
-                alt={item.title}
-              />
-              <div className="slider-text">
-                {/* <h3 className="slider-title">{item.title}</h3> */}
-                <div className="tags">
-                  <Badge bg="secondary" className="mr-1">
-                    {item?.category}
-                  </Badge>
-                  {item.size && item.size.length > 0 && (
-                    <Badge bg="secondary">{item.size} size</Badge>
-                  )}
-                  {item.country && item.country.length > 0 && (
-                    <Badge bg="secondary">{item?.country}</Badge>
-                  )}
+            <Slider {...settings}>
+              {commissions.map((item, index) => (
+                <div className="slider-item" key={index}>
+                  <img
+                    className="slider-image"
+                    src={item.imageLink}
+                    alt={item.title}
+                  />
+                  <div className="slider-text">
+                    {/* <h3 className="slider-title">{item.title}</h3> */}
+                    <div className="tags">
+                      <Badge bg="secondary" className="mr-1">
+                        {item?.category}
+                      </Badge>
+                      {item.size && item.size.length > 0 && (
+                        <Badge bg="secondary">{item.size} size</Badge>
+                      )}
+                      {item.country && item.country.length > 0 && (
+                        <Badge bg="secondary">{item?.country}</Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-      <div className="order-place mt-5">
-        <div className="container-title">
-          <p>Order Your Custom Artwork or Portrait Today!</p>
-        </div>
-        <div className="container-description">
-          <p>
-            Transform your memories into a <b>timeless piece of art</b>. We will
-            meticulously craft an{" "}
-            <b>
-              exquisite artwork or portrait based on your preferences and
-              imagination
-            </b>
-            . Whether it's a cherished memory, a beloved pet, a special
-            occasion, or a loved one's portrait, we will bring your visions to
-            life
-          </p>
-        </div>
-        <div className="container-content mt-4">
-          <div className="highlights">
-            <div className="row">
-              <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <img
-                  className="highlight-img"
-                  src="/assets/personalized_artwork.jpeg"
-                  alt="personalized artwork highlight"
-                />
-                <div className="highlight-desc mt-2">
-                  Handcrafted to your Specifications
-                </div>
-              </div>
-              <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <img
-                  className="highlight-img"
-                  src="/assets/quality_materials.jpeg"
-                  alt="quality materials highlight"
-                />
-                <span className="highlight-desc mt-2">
-                  Premium Quality and Craftsmanship
-                </span>
-              </div>
-              <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <img
-                  className="highlight-img"
-                  src="/assets/easy_order.jpeg"
-                  alt="easy ordering highlight"
-                />
-                <span className="highlight-desc mt-2">
-                  Hassle-Free ordering process
-                </span>
-              </div>
-              <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <img
-                  className="highlight-img"
-                  src="/assets/happy_customer.jpeg"
-                  alt="happy constomer highlight"
-                />
-                <span className="highlight-desc mt-2">
-                  Perfect gift to bring smiles
-                </span>
-              </div>
-            </div>
+              ))}
+            </Slider>
           </div>
-          <div className="order-form-container mt-5">
-            <div className="order-form-image">
-              <img
-                className="order-form-image-img"
-                src="/assets/wall_mockup_beautyWithin.jpg"
-                alt="Transform Your Space into Timless Art"
-              />
+          <div className="order-place mt-5">
+            <div className="container-title">
+              <p>Order Your Custom Artwork or Portrait Today!</p>
             </div>
-            {/* Steps to Order */}
-            <div className="order-process">
-              <div className="container-title pb-2">
-                <h3>Start Your Artistic Adventure</h3>
-              </div>
-              <div className="steps-container">
-                <div className="step">
-                  <div className="step-circle">1</div>
-                  <div className="step-text">Share your vision with us.</div>
-                </div>
-                <div className="step">
-                  <div className="step-circle">2</div>
-                  <div className="step-text">
-                    We'll explore ideas together in a consultation.
+            <div className="container-description">
+              <p>
+                Transform your memories into a <b>timeless piece of art</b>. We
+                will meticulously craft an{" "}
+                <b>
+                  exquisite artwork or portrait based on your preferences and
+                  imagination
+                </b>
+                . Whether it's a cherished memory, a beloved pet, a special
+                occasion, or a loved one's portrait, we will bring your visions
+                to life
+              </p>
+            </div>
+            <div className="container-content mt-4">
+              <div className="highlights">
+                <div className="row">
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <img
+                      className="highlight-img"
+                      src="/assets/personalized_artwork.jpeg"
+                      alt="personalized artwork highlight"
+                    />
+                    <div className="highlight-desc mt-2">
+                      Handcrafted to your Specifications
+                    </div>
+                  </div>
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <img
+                      className="highlight-img"
+                      src="/assets/quality_materials.jpeg"
+                      alt="quality materials highlight"
+                    />
+                    <span className="highlight-desc mt-2">
+                      Premium Quality and Craftsmanship
+                    </span>
+                  </div>
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <img
+                      className="highlight-img"
+                      src="/assets/easy_order.jpeg"
+                      alt="easy ordering highlight"
+                    />
+                    <span className="highlight-desc mt-2">
+                      Hassle-Free ordering process
+                    </span>
+                  </div>
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <img
+                      className="highlight-img"
+                      src="/assets/happy_customer.jpeg"
+                      alt="happy constomer highlight"
+                    />
+                    <span className="highlight-desc mt-2">
+                      Perfect gift to bring smiles
+                    </span>
                   </div>
                 </div>
-                <div className="step">
-                  <div className="step-circle">3</div>
-                  <div className="step-text">
-                    We finalize the masterpiece and bring it to life.
-                  </div>
-                </div>
               </div>
-
-              <Form onSubmit={handleSubmit}>
-                {step === 1 && (
-                  <>
-                    <div className="order-type-selection">
-                      <Form.Label>Select order type</Form.Label>
-                      <div className="card-container">
-                        {[
-                          "B/W Portrait",
-                          "Colour Portrait",
-                          "Large Scale Work",
-                          "Digital Illustration",
-                          "Others",
-                        ].map((type, index) => (
-                          <Card
-                            key={index}
-                            className={`order-type-card ${
-                              formData.artworkType === type ? "selected" : ""
-                            }`}
-                            onClick={() =>
-                              setFormData({ ...formData, artworkType: type })
-                            }
-                          >
-                            <Card.Body>{type}</Card.Body>
-                          </Card>
-                        ))}
+              <div className="order-form-container mt-5">
+                <div className="order-form-image">
+                  <img
+                    className="order-form-image-img"
+                    src="/assets/wall_mockup_beautyWithin.jpg"
+                    alt="Transform Your Space into Timless Art"
+                  />
+                </div>
+                {/* Steps to Order */}
+                <div className="order-process">
+                  <div className="container-title pb-2">
+                    <h3>Start Your Artistic Adventure</h3>
+                  </div>
+                  <div className="steps-container">
+                    <div className="step">
+                      <div className="step-circle">1</div>
+                      <div className="step-text">
+                        Share your vision with us.
                       </div>
                     </div>
-                    <Form.Group controlId="description">
-                      <Form.Label>Tell us your vision</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <Form.Group controlId="imageUpload">
-                      <Form.Label>Reference Images (if available)</Form.Label>
-                      <Form.Control
-                        type="file"
-                        multiple
-                        onChange={handleFileChange}
-                      />
-                    </Form.Group>
-                    <div className="container-buttons">
-                      <Button
-                        onClick={handleNextStep}
-                        className="btn-container-action-inverted mt-4"
-                        style={{
-                          border: "2px solid var(--permanent-dark-color)",
-                          color: "var(--permanent-dark-color)",
-                        }}
-                      >
-                        Next
-                      </Button>
+                    <div className="step">
+                      <div className="step-circle">2</div>
+                      <div className="step-text">
+                        We'll explore ideas together in a consultation.
+                      </div>
                     </div>
-                  </>
-                )}
+                    <div className="step">
+                      <div className="step-circle">3</div>
+                      <div className="step-text">
+                        We finalize the masterpiece and bring it to life.
+                      </div>
+                    </div>
+                  </div>
 
-                {step === 2 && (
-                  <>
-                    <Row>
-                      <Col md={6}>
-                        <Form.Group controlId="name">
-                          <Form.Label>Name</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            placeholder="Full Name"
-                            required
-                          />
-                        </Form.Group>
-                      </Col>
-                      <Col md={6}>
-                        <Form.Group controlId="email">
-                          <Form.Label>Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="Email"
-                            required
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md={3}>
-                        <Form.Group controlId="email">
-                          <Form.Label>Country Code</Form.Label>
-                          <Form.Control
-                            as="select"
-                            name="countryCode"
-                            value={formData.countryCode}
-                            onChange={handleInputChange}
-                          >
-                            <option value="">+XXX</option>
-                            {country_codes.country_code.map((code, index) => (
-                              <option key={index} value={code.dial_code}>
-                                {code.code} ({code.dial_code})
-                              </option>
+                  <Form onSubmit={handleSubmit}>
+                    {step === 1 && (
+                      <>
+                        <div className="order-type-selection">
+                          <Form.Label>Select order type</Form.Label>
+                          <div className="card-container">
+                            {[
+                              "B/W Portrait",
+                              "Colour Portrait",
+                              "Large Scale Work",
+                              "Digital Illustration",
+                              "Others",
+                            ].map((type, index) => (
+                              <Card
+                                key={index}
+                                className={`order-type-card ${
+                                  formData.artworkType === type
+                                    ? "selected"
+                                    : ""
+                                }`}
+                                onClick={() =>
+                                  setFormData({
+                                    ...formData,
+                                    artworkType: type,
+                                  })
+                                }
+                              >
+                                <Card.Body>{type}</Card.Body>
+                              </Card>
                             ))}
-                          </Form.Control>
-                        </Form.Group>
-                      </Col>
-                      <Col md={4}>
-                        <Form.Group controlId="email">
-                          <Form.Label>Mobile Number</Form.Label>
+                          </div>
+                        </div>
+                        <Form.Group controlId="description">
+                          <Form.Label>Tell us your vision</Form.Label>
                           <Form.Control
-                            type="text"
-                            name="contactNumber"
-                            value={formData.contactNumber}
+                            as="textarea"
+                            rows={3}
+                            name="description"
+                            value={formData.description}
                             onChange={handleInputChange}
-                            placeholder="123-4567-890"
                           />
                         </Form.Group>
-                      </Col>
-                      <Col md={5}>
-                        <Form.Group controlId="instagramUsername">
-                          <Form.Label>Instagram Username</Form.Label>
+                        <Form.Group controlId="imageUpload">
+                          <Form.Label>
+                            Reference Images (if available)
+                          </Form.Label>
                           <Form.Control
-                            type="text"
-                            name="instagramUsername"
-                            value={formData.instagramUsername}
-                            onChange={handleInputChange}
-                            placeholder="@"
+                            type="file"
+                            multiple
+                            onChange={handleFileChange}
                           />
                         </Form.Group>
-                      </Col>
-                    </Row>
+                        <div className="container-buttons">
+                          <Button
+                            onClick={handleNextStep}
+                            className="btn-container-action-inverted mt-4"
+                            style={{
+                              border: "2px solid var(--permanent-dark-color)",
+                              color: "var(--permanent-dark-color)",
+                              backgroundColor:"var(--dim-white-color)",
+                            }}
+                          >
+                            Next
+                          </Button>
+                        </div>
+                      </>
+                    )}
 
-                    <div className="order-type-selection">
-                      <Form.Label>How shall we reach out</Form.Label>
-                      <div className="communication-card-container">
-                        {["Email", "Whatsapp", "Instagram"].map(
-                          (type, index) => (
-                            <Card
-                              key={index}
-                              className={`communication-type-card ${
-                                formData.communication === type
-                                  ? "selected"
-                                  : ""
-                              }`}
-                              onClick={() =>
-                                setFormData({
-                                  ...formData,
-                                  communication: type,
-                                })
-                              }
-                            >
-                              <Card.Body>{type}</Card.Body>
-                            </Card>
-                          )
-                        )}
-                      </div>
-                    </div>
-                    <Form.Group controlId="description">
-                      <Form.Label>Delivery Location</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name="deliveryLocation"
-                        value={formData.deliveryLocation}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <div className="container-buttons justify-content-between">
-                      <Button
-                        onClick={handlePreviousStep}
-                        className="btn-container-action-inverted mt-4"
-                        style={{
-                          border: "2px solid var(--permanent-dark-color)",
-                          color: "var(--permanent-dark-color)",
-                        }}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        type="submit"
-                        className="btn-container-action mt-4"
-                      >
-                        Submit
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </Form>
+                    {step === 2 && (
+                      <>
+                        <Row>
+                          <Col md={6}>
+                            <Form.Group controlId="name">
+                              <Form.Label>Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                placeholder="Full Name"
+                                required
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col md={6}>
+                            <Form.Group controlId="email">
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                placeholder="Email"
+                                required
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col md={3}>
+                            <Form.Group controlId="email">
+                              <Form.Label>Country Code</Form.Label>
+                              <Select
+                                options={countryCodeOptions}
+                                onChange={handleCountryCodeChange}
+                                value={countryCodeOptions.find(
+                                  (option) =>
+                                    option.value === formData.countryCode
+                                )}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col md={4}>
+                            <Form.Group controlId="email">
+                              <Form.Label>Mobile Number</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="contactNumber"
+                                value={formData.contactNumber}
+                                onChange={handleInputChange}
+                                placeholder="123-4567-890"
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col md={5}>
+                            <Form.Group controlId="instagramUsername">
+                              <Form.Label>Instagram Username</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="instagramUsername"
+                                value={formData.instagramUsername}
+                                onChange={handleInputChange}
+                                placeholder="@"
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+
+                        <div className="order-type-selection">
+                          <Form.Label>How shall we reach out</Form.Label>
+                          <div className="communication-card-container">
+                            {["Email", "Whatsapp", "Instagram"].map(
+                              (type, index) => (
+                                <Card
+                                  key={index}
+                                  className={`communication-type-card ${
+                                    formData.communication === type
+                                      ? "selected"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    setFormData({
+                                      ...formData,
+                                      communication: type,
+                                    })
+                                  }
+                                >
+                                  <Card.Body>{type}</Card.Body>
+                                </Card>
+                              )
+                            )}
+                          </div>
+                        </div>
+                        <Form.Group controlId="description">
+                          <Form.Label>Delivery Location</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            rows={3}
+                            name="deliveryLocation"
+                            value={formData.deliveryLocation}
+                            onChange={handleInputChange}
+                          />
+                        </Form.Group>
+                        <div className="container-buttons justify-content-between">
+                          <Button
+                            onClick={handlePreviousStep}
+                            className="btn-container-action-inverted mt-4"
+                            style={{
+                              border: "2px solid var(--permanent-dark-color)",
+                              color: "var(--permanent-dark-color)",
+                              backgroundColor:"var(--dim-white-color)",
+                            }}
+                          >
+                            Back
+                          </Button>
+                          <Button
+                            type="submit"
+                            className="btn-container-action mt-4"
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </>
+                    )}
+                  </Form>
+                </div>
+              </div>
             </div>
           </div>
+          <div className="faq-section mt-5 padded-container">
+            <h2>Frequently Asked Questions</h2>
+            {faqs.map((faq, index) => (
+              <div key={index} className="faq-item">
+                <div
+                  className={`faq-question ${openFAQ === index ? "open" : ""}`}
+                  onClick={() => toggleFAQ(index)}
+                >
+                  {faq.question}
+                </div>
+                <div
+                  className={`faq-answer ${openFAQ === index ? "open" : ""}`}
+                >
+                  <p className="faq-answer-text">{faq.answer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <CustomToast
+            show={showToast.show}
+            message={showToast.message}
+            onClose={() => setShowToast({ ...showToast, show: false })}
+            type={showToast.type}
+            delay={3000}
+          />
         </div>
-      </div>
-      <div className="faq-section mt-5 padded-container">
-        <h2>Frequently Asked Questions</h2>
-        {faqs.map((faq, index) => (
-          <div key={index} className="faq-item">
-            <div
-              className={`faq-question ${openFAQ === index ? "open" : ""}`}
-              onClick={() => toggleFAQ(index)}
-            >
-              {faq.question}
-            </div>
-            <div className={`faq-answer ${openFAQ === index ? "open" : ""}`}>
-              <p className="faq-answer-text">{faq.answer}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <CustomToast
-        show={showToast.show}
-        message={showToast.message}
-        onClose={() => setShowToast({ ...showToast, show: false })}
-        type={showToast.type}
-        delay={3000}
-      />
+      )}
     </div>
   );
 };

@@ -53,7 +53,7 @@ const Footer: FC<FooterProps> = () => (
 
       <div className="footer-image-container">
         <img
-          src="/assets/footer_brush_2.png"
+          src="/assets/footer_brush_2.webp"
           alt="Decorative"
           className="footer-image"
         />

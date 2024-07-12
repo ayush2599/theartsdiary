@@ -99,16 +99,16 @@ const Contact: FC<ContactProps> = () => {
   return (
     <div className="contact padded-container">
       <Helmet>
-        <title>The Arts Diary | Contact</title>
-        <meta name="description" content="Get in touch with The Arts Diary." />
-        <meta name="keywords" content="contact, get in touch, art diary" />
-        <meta property="og:title" content="The Arts Diary | Contact" />
-        <meta property="og:description" content="Get in touch with The Arts Diary." />
+        <title>The Arts Diary | Contact Us - Reach Out for Inquiries or Collaborations</title>
+        <meta name="description" content="Contact The Arts Diary for inquiries, collaborations, or to discuss a potential art project. We are here to assist you with any questions about our artworks or services." />
+        <meta name="keywords" content="contact art gallery, art inquiries, collaborate with artists, art project discussion, contact The Arts Diary, artist contact" />
+        <meta property="og:title" content="The Arts Diary | Contact Us - Reach Out for Inquiries or Collaborations" />
+        <meta property="og:description" content="Contact The Arts Diary for inquiries, collaborations, or to discuss a potential art project. We are here to assist you with any questions about our artworks or services." />
         <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/contact" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="The Arts Diary | Contact Us" />
-        <meta name="twitter:description" content="Get in touch with us at The Arts Diary. We're here to help you with any questions or concerns." />
+        <meta name="twitter:title" content="The Arts Diary | Contact Us - Reach Out for Inquiries or Collaborations" />
+        <meta name="twitter:description" content="Contact The Arts Diary for inquiries, collaborations, or to discuss a potential art project. We are here to assist you with any questions about our artworks or services." />
         <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
       </Helmet>
       <div className="container-title">

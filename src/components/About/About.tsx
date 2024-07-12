@@ -12,16 +12,16 @@ const About: FC<AboutProps> = () => {
   return(
   <div className="about padded-container">
     <Helmet>
-        <title>The Arts Diary | About</title>
-        <meta name="description" content="Learn more about The Arts Diary and our mission." />
-        <meta name="keywords" content="about us, mission, art diary" />
-        <meta property="og:title" content="The Arts Diary | About" />
-        <meta property="og:description" content="Learn more about The Arts Diary and our mission." />
+        <title>The Arts Diary | About Us - Learn About Our Artistic Journey and Vision</title>
+        <meta name="description" content="Learn about The Arts Diary and our passion for art. From our artistic philosophy to our commitment to quality and creativity, find out what drives us to create art that resonates and inspires." />
+        <meta name="keywords" content="about The Arts Diary, our artistic journey, our vision, art philosophy, commitment to art quality, creative art studio, artist info" />
+        <meta property="og:title" content="The Arts Diary | About Us - Learn About Our Artistic Journey and Vision" />
+        <meta property="og:description" content="Learn about The Arts Diary and our passion for art. From our artistic philosophy to our commitment to quality and creativity, find out what drives us to create art that resonates and inspires." />
         <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_about.jpg" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/about" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Arts Diary | About" />
-        <meta name="twitter:description" content="Learn more about The Arts Diary and our mission." />
+        <meta name="twitter:title" content="The Arts Diary | About Us - Learn About Our Artistic Journey and Vision" />
+        <meta name="twitter:description" content="Learn about The Arts Diary and our passion for art. From our artistic philosophy to our commitment to quality and creativity, find out what drives us to create art that resonates and inspires." />
         <meta name="twitter:image" content="https://theartsdiary.ayushkarn.in/assets/thumb_about.jpg" />
       </Helmet>
     <div className="container-title">
