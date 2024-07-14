@@ -103,6 +103,7 @@ const Contact: FC<ContactProps> = () => {
         <meta name="description" content="Contact The Arts Diary for inquiries, collaborations, or to discuss a potential art project. We are here to assist you with any questions about our artworks or services." />
         <meta name="keywords" content="contact art gallery, art inquiries, collaborate with artists, art project discussion, contact The Arts Diary, artist contact" />
         <meta property="og:title" content="The Arts Diary | Contact Us - Reach Out for Inquiries or Collaborations" />
+        <meta property="og:type" content="website" />
         <meta property="og:description" content="Contact The Arts Diary for inquiries, collaborations, or to discuss a potential art project. We are here to assist you with any questions about our artworks or services." />
         <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/contact" />

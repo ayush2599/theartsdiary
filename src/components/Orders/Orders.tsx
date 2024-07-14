@@ -19,6 +19,8 @@ import { commissionWork } from "../../interface/commissionWork";
 import { Helmet } from "react-helmet-async";
 import Preloader from "../Preloader/Preloader";
 import Select from "react-select";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 interface OrdersProps {}
 
@@ -55,7 +57,10 @@ const Orders: FC<OrdersProps> = () => {
   useEffect(() => {
     document.title = "Orders | The Arts Diary";
     window.scrollTo(0, 0);
-
+    AOS.init({
+      duration: 1200,
+      once: true, 
+    });
     const fetchCommissionWorks = async () => {
       setLoading(true);
       try {
@@ -406,6 +411,7 @@ const Orders: FC<OrdersProps> = () => {
               content="custom artwork, personalized portraits, art commission, bespoke art services, order custom art, portrait artist, custom gifts"
             />
             <meta property="og:title" content="The Arts Diary | Custom Orders - Get Personalized Artworks Crafted to Your Preference" />
+            <meta property="og:type" content="website" />
             <meta
               property="og:description"
               content="Order personalized artworks tailored to your preferences at The Arts Diary. Whether it's a portrait, a landscape, or a unique piece for a special occasion, we bring your ideas to life with exquisite craftsmanship and attention to detail."
@@ -430,7 +436,7 @@ const Orders: FC<OrdersProps> = () => {
             />
           </Helmet>
           <div className="recent-works">
-            <div className="container-title">
+            <div className="container-title" data-aos="fade-up">
               <p>Recent Comisssions</p>
             </div>
 
@@ -461,10 +467,10 @@ const Orders: FC<OrdersProps> = () => {
             </Slider>
           </div>
           <div className="order-place mt-5">
-            <div className="container-title">
+            <div className="container-title" data-aos="fade-up">
               <p>Order Your Custom Artwork or Portrait Today!</p>
             </div>
-            <div className="container-description">
+            <div className="container-description" data-aos="fade-up">
               <p>
                 Transform your memories into a <b>timeless piece of art</b>. We
                 will meticulously craft an{" "}
@@ -480,7 +486,7 @@ const Orders: FC<OrdersProps> = () => {
             <div className="container-content mt-4">
               <div className="highlights">
                 <div className="row">
-                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
                     <img
                       className="highlight-img"
                       src="/assets/personalized_artwork.jpeg"
@@ -490,7 +496,7 @@ const Orders: FC<OrdersProps> = () => {
                       Handcrafted to your Specifications
                     </div>
                   </div>
-                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
                     <img
                       className="highlight-img"
                       src="/assets/quality_materials.jpeg"
@@ -500,7 +506,7 @@ const Orders: FC<OrdersProps> = () => {
                       Premium Quality and Craftsmanship
                     </span>
                   </div>
-                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
                     <img
                       className="highlight-img"
                       src="/assets/easy_order.jpeg"
@@ -510,7 +516,7 @@ const Orders: FC<OrdersProps> = () => {
                       Hassle-Free ordering process
                     </span>
                   </div>
-                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                  <div className="col-md-3 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
                     <img
                       className="highlight-img"
                       src="/assets/happy_customer.jpeg"
@@ -523,7 +529,7 @@ const Orders: FC<OrdersProps> = () => {
                 </div>
               </div>
               <div className="order-form-container mt-5">
-                <div className="order-form-image">
+                <div className="order-form-image" data-aos="fade-right">
                   <img
                     className="order-form-image-img"
                     src="/assets/wall_mockup_beautyWithin.jpg"
@@ -532,23 +538,23 @@ const Orders: FC<OrdersProps> = () => {
                 </div>
                 {/* Steps to Order */}
                 <div className="order-process">
-                  <div className="container-title pb-2">
+                  <div className="container-title pb-2" data-aos="fade-up">
                     <h3>Start Your Artistic Adventure</h3>
                   </div>
                   <div className="steps-container">
-                    <div className="step">
+                    <div className="step" data-aos="fade-up">
                       <div className="step-circle">1</div>
                       <div className="step-text">
                         Share your vision with us.
                       </div>
                     </div>
-                    <div className="step">
+                    <div className="step" data-aos="fade-up">
                       <div className="step-circle">2</div>
                       <div className="step-text">
                         We'll explore ideas together in a consultation.
                       </div>
                     </div>
-                    <div className="step">
+                    <div className="step" data-aos="fade-up">
                       <div className="step-circle">3</div>
                       <div className="step-text">
                         We finalize the masterpiece and bring it to life.
@@ -556,7 +562,7 @@ const Orders: FC<OrdersProps> = () => {
                     </div>
                   </div>
 
-                  <Form onSubmit={handleSubmit}>
+                  <Form onSubmit={handleSubmit} data-aos="fade-up">
                     {step === 1 && (
                       <>
                         <div className="order-type-selection">
@@ -755,10 +761,10 @@ const Orders: FC<OrdersProps> = () => {
               </div>
             </div>
           </div>
-          <div className="faq-section mt-5 padded-container">
+          <div className="faq-section mt-5 padded-container" data-aos="fade-up">
             <h2>Frequently Asked Questions</h2>
             {faqs.map((faq, index) => (
-              <div key={index} className="faq-item">
+              <div key={index} className="faq-item" data-aos="fade-up">
                 <div
                   className={`faq-question ${openFAQ === index ? "open" : ""}`}
                   onClick={() => toggleFAQ(index)}

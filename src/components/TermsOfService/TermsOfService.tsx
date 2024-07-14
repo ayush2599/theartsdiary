@@ -17,6 +17,7 @@ const TermsOfService: FC<TermsOfServiceProps> = () => {
         <meta name="description" content="Review the Terms of Service for The Arts Diary to understand the conditions under which our services and content are provided. It's important to us that you know your rights and our commitments." />
         <meta name="keywords" content="terms of service, service conditions, user rights, legal terms, art service terms, usage policy" />
         <meta property="og:title" content="The Arts Diary | Terms of Service - Understand Our Terms and Conditions" />
+        <meta property="og:type" content="website" />
         <meta property="og:description" content="Review the Terms of Service for The Arts Diary to understand the conditions under which our services and content are provided. It's important to us that you know your rights and our commitments." />
         <meta property="og:image" content="https://theartsdiary.ayushkarn.in/assets/logo.png" />
         <meta property="og:url" content="https://theartsdiary.ayushkarn.in/termsofservice" />

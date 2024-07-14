@@ -12,6 +12,8 @@ import Masonry from "react-layout-masonry";
 import { Badge } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import Preloader from "../Preloader/Preloader";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 interface WorksProps {}
 
@@ -24,7 +26,10 @@ const Works: FC<WorksProps> = () => {
   useEffect(() => {
     document.title = "Works | The Arts Diary";
     window.scrollTo(0, 0);
-
+    AOS.init({
+      duration: 1200,
+      once: true, 
+    });
     const fetchMyWorks = async () => {
       setLoading(true);
 
@@ -109,6 +114,7 @@ const Works: FC<WorksProps> = () => {
               content="art collections, paintings for sale, custom sketches, artwork for home decor, office art, gift ideas, art gallery online"
             />
             <meta property="og:title" content="The Arts Diary | Our Works - Explore Our Diverse Art Collections" />
+            <meta property="og:type" content="website" />
             <meta
               property="og:description"
               content="Dive into our extensive collection of artworks at The Arts Diary. From captivating paintings to custom sketches, find the perfect piece for your home, office, or as a thoughtful gift. Each piece is crafted with attention to detail and artistic passion."
@@ -137,6 +143,7 @@ const Works: FC<WorksProps> = () => {
               <Card
                 className="work-custom-card"
                 onClick={() => handleCardClick(work)}
+                data-aos="fade-up"
               >
                 <div className="work-card-image">
                   <Card.Img

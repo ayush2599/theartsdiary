@@ -14,6 +14,8 @@ import { testimonial } from "../../interface/testimonial";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Preloader from "../Preloader/Preloader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface HomeProps {}
 
@@ -43,10 +45,17 @@ const Home: FC<HomeProps> = () => {
   useEffect(() => {
     document.title = "The Arts Diary";
     window.scrollTo(0, 0);
+    AOS.init({
+      duration: 1200,
+      once: true,
+    });
     const fetchMyWorks = async () => {
       setLoading(true);
-      const q = query(collection(db, "myWorks"), where("isFeatured", "==", true));
-    
+      const q = query(
+        collection(db, "myWorks"),
+        where("isFeatured", "==", true)
+      );
+
       try {
         const querySnapshot = await getDocs(q);
         const worksData: myWork[] = [];
@@ -123,11 +132,14 @@ const Home: FC<HomeProps> = () => {
   return (
     <div>
       {loading ? (
-        <Preloader/>
+        <Preloader />
       ) : (
         <div className="Home">
           <Helmet>
-            <title>The Arts Diary | Home - Discover Unique Artworks and Creative Inspirations</title>
+            <title>
+              The Arts Diary | Home - Discover Unique Artworks and Creative
+              Inspirations
+            </title>
             <meta
               name="description"
               content="Explore The Arts Diary to discover unique artworks that transform spaces and evoke emotions. Perfect for gifts, home decor, and personal collections, our diverse range of art pieces and custom portraits captures the essence of creativity and personal touch."
@@ -136,7 +148,11 @@ const Home: FC<HomeProps> = () => {
               name="keywords"
               content="unique artworks, home decoration, art for gifts, custom portraits, art inspirations, buy art online, art gallery"
             />
-            <meta property="og:title" content="The Arts Diary | Home - Discover Unique Artworks and Creative Inspirations" />
+            <meta
+              property="og:title"
+              content="The Arts Diary | Home - Discover Unique Artworks and Creative Inspirations"
+            />
+            <meta property="og:type" content="website" />
             <meta
               property="og:description"
               content="Explore The Arts Diary to discover unique artworks that transform spaces and evoke emotions. Perfect for gifts, home decor, and personal collections, our diverse range of art pieces and custom portraits captures the essence of creativity and personal touch."
@@ -150,7 +166,10 @@ const Home: FC<HomeProps> = () => {
               content="https://theartsdiary.ayushkarn.in/"
             />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="The Arts Diary | Home - Discover Unique Artworks and Creative Inspirations" />
+            <meta
+              name="twitter:title"
+              content="The Arts Diary | Home - Discover Unique Artworks and Creative Inspirations"
+            />
             <meta
               name="twitter:description"
               content="Explore The Arts Diary to discover unique artworks that transform spaces and evoke emotions. Perfect for gifts, home decor, and personal collections, our diverse range of art pieces and custom portraits captures the essence of creativity and personal touch."
@@ -168,22 +187,27 @@ const Home: FC<HomeProps> = () => {
             />
             <div className="header-image-overlay"></div>
             <div className="header-content">
-              <h1 className="header-title">
+              <h1 className="header-title" data-aos="fade-up">
                 Weaving Dreams into Artistic Realities
               </h1>
               <div className="cta-buttons">
                 <Link to="/orders">
-                  <Button className="btn-place-order me-2">
+                  <Button className="btn-place-order me-2" data-aos="fade-up">
                     Place an order
                   </Button>
                 </Link>
                 <Link to="/about">
-                  <Button className="btn-read-story">Read my story</Button>
+                  <Button className="btn-read-story" data-aos="fade-up">
+                    Read my story
+                  </Button>
                 </Link>
               </div>
             </div>
           </div>
-          <div className="featured-artworks padded-container">
+          <div
+            className="featured-artworks padded-container"
+            data-aos="fade-up"
+          >
             <div className="container-title">
               <p>Featured Artworks</p>
             </div>
@@ -197,7 +221,7 @@ const Home: FC<HomeProps> = () => {
                 gap={gapSize}
               >
                 {myWorks.map((work) => (
-                  <div key={work.title}>
+                  <div key={work.title} data-aos="fade-up">
                     <Card className="custom-card">
                       <div className="card-image">
                         <Card.Img
@@ -224,27 +248,30 @@ const Home: FC<HomeProps> = () => {
           </div>
 
           <div className="workshops padded-container">
-            <div className="container-title">
+            <div className="container-title" data-aos="fade-up">
               <p>Workshops</p>
             </div>
-            <div className="container-images">
+            <div className="container-images" data-aos="fade-up">
               <img
                 className="workshop-img side-image"
                 src="assets/workshop_1.jpg"
                 alt="Virtual Sketch workshop"
+                data-aos="fade-right"
               />
               <img
                 className="workshop-img center-image"
                 src="assets/workshop_2.jpg"
                 alt="Live Sketch workshop"
+                data-aos="fade-down"
               />
               <img
                 className="workshop-img side-image"
                 src="assets/workshop_3.jpg"
                 alt="Student at live workshop"
+                data-aos="fade-left"
               />
             </div>
-            <div className="container-text workshop-text">
+            <div className="container-text workshop-text" data-aos="fade-up">
               <p>
                 <strong>Step into the world of creativity</strong> in my art
                 workshops, tailored for enthusiasts at all levels—
@@ -275,12 +302,12 @@ const Home: FC<HomeProps> = () => {
           </div>
 
           <div className="services padded-container">
-            <div className="container-title">
+            <div className="container-title" data-aos="fade-up">
               <p>Services</p>
             </div>
 
             <div className="services-container">
-              <div className="service-card">
+              <div className="service-card" data-aos="fade-up">
                 <div className="service-image">
                   <img
                     src="assets/frame_gift.jpeg"
@@ -304,7 +331,7 @@ const Home: FC<HomeProps> = () => {
                 </div>
               </div>
 
-              <div className="service-card">
+              <div className="service-card" data-aos="fade-up">
                 <div className="service-image">
                   <img src="assets/buddha_mural.jpeg" alt="Large Scale Works" />
                 </div>
@@ -329,7 +356,7 @@ const Home: FC<HomeProps> = () => {
                 </div>
               </div>
 
-              <div className="service-card">
+              <div className="service-card" data-aos="fade-up">
                 <div className="service-image">
                   <img
                     src="assets/digital_illustration.jpeg"
@@ -359,10 +386,10 @@ const Home: FC<HomeProps> = () => {
           </div>
 
           <div className="testimonials padded-container">
-            <div className="container-title">
+            <div className="container-title" data-aos="fade-up">
               <p>Hear from the clients</p>
             </div>
-            <div className="testimonial-slider">
+            <div className="testimonial-slider" data-aos="fade-up">
               <Slider {...testimonialSliderSettings}>
                 {testimonials.map((testimonial) => (
                   <div className="testimonial-container" key={testimonial.id}>
