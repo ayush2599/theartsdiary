@@ -103,7 +103,7 @@
     align-items: center; /* Ensures the logo is vertically centered */
 
     img{
-        filter: invert(90%);
+        filter: var(--footer-invert-filter);
         margin: auto;
         display: block;
     }
@@ -135,6 +135,8 @@
     bottom: 0px; /* Align to the bottom */
     position: absolute;
     width: 150px;
+    filter: drop-shadow(rgba(12, 12, 12, 0.42) 0.8rem 0.8rem 6px);
+
 }
 
 .footer-nav {

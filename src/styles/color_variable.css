@@ -13,6 +13,7 @@
   --dim-black-color: #282828;
   --text-darkonlightbg-color: #282828;
   --invert-filter: none;
+  --footer-invert-filter: invert(90%);
   --button-bg-color: #fff; /* Light background for the button in light mode */
   --button-text-color: #000; /* Dark text color in light mode */
   --button-hover-bg-color: #e0e0e0; 
@@ -52,6 +53,7 @@
     --frame-border-color: #f7f7f4; /* Dark grey frame border */
     --overlay-background: rgba(255, 255, 255, 0.1); /* Lighter overlay for contrast */
     --invert-filter: invert(100%);
+    --footer-invert-filter: invert(90%);
     --button-bg-color: #333; /* Dark background for the button in dark mode */
     --button-text-color: #fff; /* Light text color in dark mode */
     --button-hover-bg-color: #555;
@@ -60,16 +62,17 @@
 [data-theme="surprise"] {
   --background-color: linear-gradient(120deg, #FFDE03 20%, #F9F871 80%); /* Bright yellow gradient */
   --text-color: #806000; /* Dark mustard for contrast */
-  --navbar-background-color: #F0C808; /* Sunflower yellow */
+  --navbar-background-color: #f7e588; /* Sunflower yellow */
   --navbar-link-color: #405D27; /* Leaf green for links */
   --permanent-white-color: #FFFFFF; /* Pure white for clean contrasts */
   --permanent-dark-color: #593315; /* Dark brown like sunflower seeds */
   --light-background-color: #FFFACD; /* Lemon chiffon for light areas */
-  --dark-background-color: #C2B280; /* Sand dune, a muted earth tone */
+  --dark-background-color: #c2a858; /* Sand dune, a muted earth tone */
   --dim-white-color: #FFFFE0; /* Light yellow for soft accents */
   --dim-black-color: #484830; /* Olive drab for subdued dark elements */
   --text-darkonlightbg-color: #3F6212; /* Deep forest green for text */
   --invert-filter: none;
+  --footer-invert-filter: invert(30%);
   --button-bg-color: #FFAA1D; /* Vibrant yellow for buttons */
   --button-text-color: #453821; /* Dark brown for button text */
   --button-hover-bg-color: #CCB974; /* Khaki for button hover background */
@@ -80,7 +83,7 @@
   --inner-shadow: rgba(128, 128, 0, 0.5); /* Olive for an earthy inner shadow */
   --outer-shadow: rgba(139, 69, 19, 0.8); /* Saddle brown for deep external shadows */
   --outer-highlight: rgba(222, 184, 135, 0.6); /* Burly wood for a glowing external highlight */
-  --frame-border-color: #DAA520; /* Golden rod for a glowing frame border */
+  --frame-border-color: #fff; /* Golden rod for a glowing frame border */
   --overlay-background: rgba(184, 134, 11, 0.3); /* Dark goldenrod for a soft overlay */
 }
 

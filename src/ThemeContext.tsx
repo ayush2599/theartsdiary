@@ -75,16 +75,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       setTimeout(() => {
         setTheme("light");
         setSparkling(false);
+        document.querySelectorAll(".sparkle").forEach(element => {
+          element.parentNode?.removeChild(element);
+        });
       }, 3000); // Duration for the sparkle effect before switching theme
     } else {
       setSparkling(true);
       setTimeout(() => {
         setTheme("surprise");
         setSparkling(false);
-        const element = document.querySelector(".sparkle");
-        if (element) {
+        document.querySelectorAll(".sparkle").forEach(element => {
           element.parentNode?.removeChild(element);
-        }
+        });
       }, 3000); // Duration for the sparkle effect before switching theme
     }
   };
