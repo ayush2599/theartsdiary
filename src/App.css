@@ -150,3 +150,48 @@ body {
   color: #231d1d;
   border: 2px solid #231d1d; /* Remove default border */
 }
+.sparkling-area {
+  position: absolute; /* Default to absolute to not interfere */
+  top: 0;
+  left: 0;
+  width: 100%; /* Default to 0 width */
+  height: 100%; /* Default to 0 height */
+  z-index: 10000; /* Keep it behind everything when not active */
+  overflow: hidden;
+}
+
+/* Apply overlay and make visible only when sparkling */
+.sparkling {
+  position: fixed !important; /* Cover the entire screen when active */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.616) !important; /* Dark overlay */
+  z-index: 10000 !important; /* Ensures it's on top when active */
+  pointer-events: auto !important; /* Allow interaction with the sparkles */
+  overflow: hidden;
+}
+
+/* Styles for individual sparkles using a custom image */
+.sparkle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url('../public/assets/sparkle.png'); /* Check this path */
+  background-size: cover;
+  animation: sparkle-animation 1.5s ease-in-out forwards;
+}
+
+/* Keyframes for sparkle animations */
+@keyframes sparkle-animation {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

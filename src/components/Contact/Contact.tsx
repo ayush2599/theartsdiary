@@ -144,7 +144,7 @@ const Contact: FC<ContactProps> = () => {
               <FontAwesomeIcon icon={faInstagram} />
             </a>
             <a
-              href="https://facebook.com/theartsdiary"
+              href="https://facebook.com/theartsdiaryofficial"
               target="_blank"
               rel="noopener noreferrer"
             >

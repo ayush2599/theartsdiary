@@ -189,6 +189,40 @@
     cursor: pointer; /* Change cursor to pointer to indicate clickability */
 }
 
+.tooltip-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    left: 110%; /* Position to the right of the image */
+    margin-left: 10px; /* Spacing between image and tooltip */
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+  
+  /* Tooltip arrow */
+  .tooltip-text::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* At the left side of the tooltip */
+    margin-top: -5px; /* Center the arrow vertically */
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black; /* Arrow pointing to the left */
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .footer-image-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
 /* Media Query for Mobile Screens */
 @media (max-width: 768px) {
 

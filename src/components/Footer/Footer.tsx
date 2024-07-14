@@ -3,13 +3,16 @@ import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF, faTiktok, faBehance } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
-
+import { useTheme } from "../../ThemeContext";
+import { Tooltip } from 'react-tooltip';
 
 interface FooterProps {}
 
 const currentYear = new Date().getFullYear();
 
-const Footer: FC<FooterProps> = () => (
+const Footer: FC<FooterProps> = () => {
+  const { setSurpriseTheme } = useTheme();
+  return (
   <div>
     <div className="wave-transition">
       <svg
@@ -56,7 +59,13 @@ const Footer: FC<FooterProps> = () => (
           src="/assets/footer_brush_2.webp"
           alt="Decorative"
           className="footer-image"
+          onClick={setSurpriseTheme} 
+          style={{ cursor: 'pointer' }}
+          data-tooltip-id="surprise-tooltip" data-tooltip-content="Touch me for a magic!"
         />
+                {/* <span className="tooltip-text">Touch me for a magic!</span> */}
+                <Tooltip id="surprise-tooltip" />
+
       </div>
 
       <div className="footer-right">
@@ -64,10 +73,10 @@ const Footer: FC<FooterProps> = () => (
           <a href="https://instagram.com/theartsdiary" className="social-icon">
           <FontAwesomeIcon icon={faInstagram}/>
           </a>
-          <a href="https://facebook.com/theartsdiary" className="social-icon">
+          <a href="https://facebook.com/theartsdiaryofficial" className="social-icon">
           <FontAwesomeIcon icon={faFacebookF} />
           </a>
-          <a href="https://tiktok.com" className="social-icon">
+          <a href="https://tiktok.com/ayush_diaries" className="social-icon">
           <FontAwesomeIcon icon={faBehance} />
           </a>
           <a href="https://behance.net" className="social-icon">
@@ -96,6 +105,8 @@ const Footer: FC<FooterProps> = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
+
 
 export default Footer;

@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { Tab, Tabs, Table, Button } from "react-bootstrap";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { myWork } from "../../interface/myWork";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesome
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,8 @@ import { FAQItem } from "../../interface/FAQItem";
 import { OrderFormData } from "../../interface/OrderFormData";
 import { testimonial } from "../../interface/testimonial";
 import { commissionWork } from "../../interface/commissionWork";
+import AdminLogin from "../AdminLogin/AdminLogin";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface AdminProps {}
 
@@ -19,8 +21,41 @@ const Admin: FC<AdminProps> = () => {
   const [orders, setOrders] = useState<OrderFormData[]>([]);
   const [testimonials, setTestimonials] = useState<testimonial[]>([]);
   const [commissions, setCommissions] = useState<commissionWork[]>([]);
+  const [user, loading] = useAuthState(auth);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Admin | The Arts Diary";
+    if (user) {
+    fetchMyWorks();
+    fetchFaq();
+    fetchOrders();
+    fetchTestimonials();
+    fetchCommissions();
+    }
+  }, [user]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return (
+      <AdminLogin
+        onLoginSuccess={() => console.log("Logged in successfully")}
+      />
+    );
+  }
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      navigate('/home');
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
 
   const fetchMyWorks = async () => {
     const querySnapshot = await getDocs(collection(db, "myWorks"));
@@ -72,14 +107,7 @@ const Admin: FC<AdminProps> = () => {
     );
   };
 
-  useEffect(() => {
-    document.title = "Admin | The Arts Diary";
-    fetchMyWorks();
-    fetchFaq();
-    fetchOrders();
-    fetchTestimonials();
-    fetchCommissions();
-  }, []); // Fetch works when the component mounts
+   // Fetch works when the component mounts
 
   const handleDelete = async (documentId: string | null) => {
     try {
@@ -165,6 +193,8 @@ const Admin: FC<AdminProps> = () => {
 
   return (
     <div className="admin-container">
+      <Button onClick={handleLogout}>Logout</Button>
+
       <div className="admin">
         <Tabs defaultActiveKey="works">
           <Tab eventKey="works" title="Works" className="">
