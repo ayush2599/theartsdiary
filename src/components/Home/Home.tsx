@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import "./Home.css";
 import { Button } from "react-bootstrap";
@@ -16,13 +16,18 @@ import { Helmet } from "react-helmet-async";
 import Preloader from "../Preloader/Preloader";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
+  gsap.registerPlugin(ScrollTrigger);
   const [loading, setLoading] = useState(true);
   const [myWorks, setMyWorks] = useState<myWork[]>([]);
   const [testimonials, setTestimonials] = useState<testimonial[]>([]);
+
+  const scrollRef = useRef<HTMLDivElement>(null); // Ref for the scrolling container
 
   const calculateGap = (width: number): number => {
     if (width < 768) return 20; // Smaller screens
@@ -49,6 +54,7 @@ const Home: FC<HomeProps> = () => {
       duration: 1200,
       once: true,
     });
+
     const fetchMyWorks = async () => {
       setLoading(true);
       const q = query(
@@ -101,6 +107,25 @@ const Home: FC<HomeProps> = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (myWorks.length > 0 && scrollRef.current) {
+      const panels = gsap.utils.toArray(".featured-artwork");
+      const offsetWidth = scrollRef.current.offsetWidth; // Store this to avoid multiple accesses
+      gsap.to(panels, {
+        xPercent: -105 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: scrollRef.current,
+          start: "top top",
+          pin: true,
+          scrub: 2,
+          end: () => `+=${offsetWidth * (panels.length - 1) * 1.5}`,
+          invalidateOnRefresh: true,
+        },
+      });
+    }
+  }, [myWorks]); // Ensuring that gsap initializes only if myWorks and scrollRef.current are ready
 
   const EmptyArrow = () => <div style={{ display: "none" }} />;
 
@@ -205,46 +230,35 @@ const Home: FC<HomeProps> = () => {
             </div>
           </div>
           <div
-            className="featured-artworks padded-container"
-            data-aos="fade-up"
+            ref={scrollRef}
+            className="featured-artworks-container padded-container"
           >
-            <div className="container-title">
-              <p>Featured Artworks</p>
+            <div className="featured-artwork intro-slide">
+              <h1>Spotlight Wall</h1>
             </div>
-            <div className="container">
-              <Masonry
-                columns={{
-                  400: 1,
-                  768: 2,
-                  1024: getColumnCount(myWorks.length),
-                }}
-                gap={gapSize}
-              >
-                {myWorks.map((work) => (
-                  <div key={work.title} data-aos="fade-up">
-                    <Card className="custom-card">
-                      <div className="card-image">
-                        <Card.Img
-                          variant="top"
-                          src={work.imageLink}
-                          alt={work.title}
-                        />
-                      </div>
-                    </Card>
+            {myWorks.map((work, index) => (
+              <div className="featured-artwork" key={index}>
+                <div className="custom-card">
+                  <div className="card-image">
+                    <img src={work.imageLink} alt={work.title} />
                   </div>
-                ))}
-              </Masonry>
-              <div className="container-buttons mt-4 mb-4">
-                <Link to="/works">
-                  <Button
-                    variant="primary"
-                    className="btn-container-action me-2"
-                  >
-                    See more works
-                  </Button>
-                </Link>
+                </div>
+                <div className="artwork-details">
+                  <h2>{work.title}</h2>
+                  <p>
+                    {work.category}
+                    <br />
+                    {work?.size && work.size.length > 0 && (
+                      <>
+                        {work.size} <br />
+                      </>
+                    )}
+                    Artist - Ayush Karn <br />
+                    {work.year}
+                  </p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
           <div className="workshops padded-container">

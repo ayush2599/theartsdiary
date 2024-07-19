@@ -62,12 +62,12 @@
 [data-theme="surprise"] {
   --background-color: linear-gradient(120deg, #FFDE03 20%, #F9F871 80%); /* Bright yellow gradient */
   --text-color: #806000; /* Dark mustard for contrast */
-  --navbar-background-color: #f7e588; /* Sunflower yellow */
+  --navbar-background-color: #e3e786; /* Sunflower yellow */
   --navbar-link-color: #405D27; /* Leaf green for links */
   --permanent-white-color: #FFFFFF; /* Pure white for clean contrasts */
   --permanent-dark-color: #593315; /* Dark brown like sunflower seeds */
-  --light-background-color: #FFFACD; /* Lemon chiffon for light areas */
-  --dark-background-color: #c2a858; /* Sand dune, a muted earth tone */
+  --light-background-color: #d8b5d6; /* Lemon chiffon for light areas */
+  --dark-background-color: #f9b787; /* Sand dune, a muted earth tone */
   --dim-white-color: #FFFFE0; /* Light yellow for soft accents */
   --dim-black-color: #484830; /* Olive drab for subdued dark elements */
   --text-darkonlightbg-color: #3F6212; /* Deep forest green for text */

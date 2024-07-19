@@ -44,7 +44,15 @@
 .header-title {
   font-size: 2.5em;
   margin-bottom: 20px;
-  background-image: linear-gradient(to right, #ffffff00 0%, #ffffff77 5%, #f0f0f0 25%, #f0f0f0 75%, #ffffff77 95%, #ffffff00 100%);
+  background-image: linear-gradient(
+    to right,
+    #ffffff00 0%,
+    #ffffff77 5%,
+    #f0f0f0 25%,
+    #f0f0f0 75%,
+    #ffffff77 95%,
+    #ffffff00 100%
+  );
   width: fit-content;
   padding-left: 15px;
   padding-right: 15px;
@@ -105,9 +113,60 @@
   box-shadow: none !important;
 }
 
-.featured-artworks {
+.featured-artworks-container {
   background-color: var(--light-background-color);
   color: var(--text-darkonlightbg-color);
+  display: flex;
+  flex-direction: row; /* Ensure horizontal layout */
+  overflow-x: hidden; /* Prevent default horizontal scroll */
+  width: 100vw; /* Ensure container is viewport width */
+  height: 100vh;
+  scroll-snap-type: x mandatory; /* CSS scroll snapping might interfere with GSAP in some cases */
+  position: relative; /* Needed if we're pinning anything inside */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.featured-artworks-container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.featured-artwork.intro-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  text-align: center;
+}
+
+.featured-artwork.intro-slide h1{
+  font-family: 'Syne-Medium';
+  color: var(--text-darkonlightbg-color);
+  font-size: 9em !important; /* Large text size */
+  padding: 20px; /* Adequate padding */
+}
+
+.featured-artwork {
+  padding-top: 4%;
+  width: 80vw;
+  height: 100vh;
+  flex-shrink: 0; /* Prevent flexbox from shrinking panels */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* For positioning details */
+}
+
+.artwork-details {
+  position: relative;
+  color: var(--dim-black-color);
+  text-align: left;
+  background-color: var(--dim-white-color);
+  padding: 10px 20px;
+  left: 12%;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  min-width: 25vw;
 }
 
 .custom-card {
@@ -133,39 +192,11 @@
 
     img {
       border-radius: 0px !important;
-    }
-
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--overlay-background);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-      color: #fff;
-      border-radius: 0px !important;
-    }
-
-    .overlay-text {
-      font-size: 20px;
+      width: auto; /* Maintain aspect ratio */
+      max-height: 70vh !important; /* Fit within the viewport without stretching */
+      object-fit: contain; /* Ensure the image is contained within its element */
     }
   }
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &:hover .image-overlay {
-    opacity: 1;
-  }
-}
-.featured-artworks .container {
-  width: 80%;
 }
 
 .workshops {
@@ -234,7 +265,6 @@
   font-size: 1.15rem;
 }
 
-
 .testimonials {
   background-color: var(--light-background-color);
   display: flex;
@@ -287,7 +317,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   min-height: 210px;
 }
 
@@ -400,7 +430,9 @@
 .service-card button:hover,
 .service-card button:focus,
 .service-card button:active {
-  background-color: var(--permanent-white-color) !important; /* Slightly darker on hover for visual feedback */
+  background-color: var(
+    --permanent-white-color
+  ) !important; /* Slightly darker on hover for visual feedback */
   color: var(--permanent-dark-color) !important;
   border: 2px solid var(--permanent-dark-color) !important; /* Remove default border */
   box-shadow: none !important;
@@ -419,13 +451,58 @@
   }
 
   .header-title {
-    font-size: 2.0rem !important;
+    font-size: 2rem !important;
     padding-top: 5px;
     padding-bottom: 5px;
   }
 
+  .featured-artwork.intro-slide h1{
+    font-size: 5em !important; /* Large text size */
+    padding: 10px; /* Adequate padding */
+  }
+
+  .featured-artwork {
+    padding-top: 5%;
+    width: 100vw;
+    flex-direction: column;
+    overflow-y: hidden;
+  }
+
+  .artwork-details {
+    background-color: #ffffff00; /*  transparent */
+    color: var(--text-darkonlightbg-color);
+    box-shadow: none;
+    text-align: center;
+    padding: 10px 20px;
+    left: 0%;
+    min-width: 75vw;
+    margin-top: 10px;
+
+      h2{
+        font-size: 18px;
+        margin-bottom: 2px;
+      }
+
+      p{
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 0px;
+      }
+  }
+
   .custom-card {
     padding: 10px; /* Smaller padding on mobile */
+  }
+
+  .card-image {
+    position: relative;
+    padding: 8px;
+
+    img {
+      width: auto; /* Maintain aspect ratio */
+      max-height: 50vh !important; /* Fit within the viewport without stretching */
+      max-width: 70vw !important;
+    }
   }
 
   .featured-artworks .container {
@@ -474,7 +551,7 @@
     margin-left: 0;
   }
 
-  .testimonial-text{
+  .testimonial-text {
     width: 100%;
   }
 

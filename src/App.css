@@ -29,6 +29,7 @@ body {
   font-family: "Syne-Regular", sans-serif;
   background: var(--light-background-color) !important;
   background-color: var(--light-background-color) !important;
+  overflow-x: hidden;
 }
 .content-container {
   margin-left: 0px;
